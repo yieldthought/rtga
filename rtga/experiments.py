@@ -3,9 +3,11 @@
 from dataclasses import asdict, replace
 from datetime import datetime, timezone
 import json
+import hashlib
 from pathlib import Path
 import platform
 import subprocess
+import sys
 from time import perf_counter
 
 import numpy as np
@@ -20,7 +22,9 @@ def provenance():
     return {'created_utc': datetime.now(timezone.utc).isoformat(),
             'git_commit': git('rev-parse', 'HEAD'), 'git_dirty': bool(git('status', '--porcelain')),
             'python': platform.python_version(), 'platform': platform.platform(),
-            'numpy': np.__version__}
+            'numpy': np.__version__, 'command': [sys.executable, *sys.argv],
+            'source_sha256': {p.name: hashlib.sha256(p.read_bytes()).hexdigest()
+                              for p in Path(__file__).parent.glob('*.py')}}
 
 
 def write_json(path, data):
