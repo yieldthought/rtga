@@ -8,4 +8,17 @@ The proposed starting point is a small visible 2D environment with three learned
 
 Read the [research and experiment plan](RESEARCH_PLAN.md) for primary literature, architecture, comparison experiments, visual diagnostics, and the progression toward learned action hierarchies and pixel environments.
 
-Status: research and planning complete; implementation has not started. No benchmark results are claimed.
+The implementation now includes a vectorized puck environment, persistent evolutionary search, categorical CEM and random-search comparisons, bootstrapped online dynamics ensembles, and a standalone trace viewer.
+
+Read the [research journal](PROGRESS.md) for the current experiments and mini-papers. Curiosity-only Mario completion remains the target; it has not been demonstrated here.
+
+## Run the first experiment
+
+```bash
+python3.12 -m venv .venv
+.venv/bin/python -m pip install -e '.[dev]'
+.venv/bin/python -m pytest -q
+.venv/bin/python -m rtga.cli oracle --output runs/oracle --seeds 10
+```
+
+The output directory contains complete per-seed measurements and self-contained HTML viewers of the first seed's actual planning traces. This initial diagnostic supplies an exact simulator and a goal objective; it is not the curiosity-only experiment.
