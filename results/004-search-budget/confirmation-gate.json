@@ -1,0 +1,16 @@
+{
+  "advance": true,
+  "diagnostic_repairs": {
+    "immigrants": [
+      108
+    ],
+    "repeat4": [
+      108
+    ],
+    "horizon48": [
+      108
+    ]
+  },
+  "development_improvements": [],
+  "decision": "Run all five fixed conditions on200..219 without retuning"
+}

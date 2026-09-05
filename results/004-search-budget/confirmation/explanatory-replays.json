@@ -1,0 +1,174 @@
+{
+  "purpose": "Exact trace regeneration after outcome inspection; not additional independent evaluation seeds",
+  "provenance": {
+    "created_utc": "2026-09-05T10:12:53.993985+00:00",
+    "git_commit": "5f6b89e1abb59de4d7e7f13ffb848b1e02446bae",
+    "git_dirty": true,
+    "python": "3.12.11",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "numpy": "2.5.2",
+    "command": [
+      "/opt/homebrew/Cellar/python@3.12/3.12.11/Frameworks/Python.framework/Versions/3.12/Resources/Python.app/Contents/MacOS/Python",
+      "-"
+    ],
+    "source_sha256": {
+      "envs.py": "9883f95d36f3929cb61ca83eb0372550f0a082d8365fec5818f38121c8455956",
+      "viewer.py": "72ccd5e3ebbfaa4f68ff0c7b05ba0fd0d1454c60a590c7e75f35b95f2237d76e",
+      "models.py": "dd329c391f93a317f185a895fb8369b0e39370c1b77e5ad7f67f5dbcfa6b298f",
+      "__init__.py": "aaf2010db85eef0acabcaf4dd3eeeeae037891e3b9a7d1c2b00dd900ac1b0c36",
+      "model_study.py": "ea3a4f9aee5e026032d7ea90f75d9815fa6c93e2fe551678289d4b9661fe7d24",
+      "experiments.py": "f47a9451894bf83341b9030ae3c8302589301123f20991a2c38f12ad552b2569",
+      "cli.py": "f3ff13862cb15d0715c4279d63099bdb4a9523e90e3a2dac571aa2bf13c60d69",
+      "event_recall_study.py": "c7500a14bcb5b20737568ab86f888b82273323997cf79be7800f7943cb88e5ff",
+      "oracle_report.py": "fe3bdc22cc1d888285b877a167e94c1ef6aec743cfccd790cf6bbf9599fe33a7",
+      "agent.py": "54d8870e9ad39010e44204be1503e9392ca3ac4b418bc1324af9e454b8babe80",
+      "planning.py": "201f301fa74b340f72ce97d542cede37d389cc0ab79a3adf89c71c64ce52b36a",
+      "horizon_study.py": "f93413b7b46dbfb900434fa73f1b41f3169dd236e1964ab60bd1692645bcafa3",
+      "online_experiment.py": "aa9a49c7172488f61df830cc57d9bae7a92dd985a94df2e241266146a9813cd2",
+      "model_report.py": "66e8158b97ba856ea5f5d72450bbb782de4b62c4d079b680f0193e846febb6e1",
+      "adapters.py": "c13100791a3966195eb928b6994f557d4aa3a12dde352f120745e1c374e31dca"
+    }
+  },
+  "records": [
+    {
+      "seed": 217,
+      "condition": "original",
+      "exact_actions_and_distances": true,
+      "model_transitions": 491520,
+      "real_actions": 80,
+      "trace_diagnostics": {
+        "observed_wall_contact_frames": 60,
+        "longest_wall_contact_run": 60,
+        "first_observed_crossing_step": null,
+        "last_observed_position": [
+          0.465,
+          0.26168
+        ],
+        "mean_recorded_prefix_entropy_bits": 0.2807740277509903,
+        "prefix_entropy_scope": "First-action entropy of the24 stored, score-ordered plans, not the complete population",
+        "observation_timing": "Pre-action states0..79; final post-action state80 is not in these trace diagnostics"
+      },
+      "trace": "trace-seed217-original.json.gz"
+    },
+    {
+      "seed": 217,
+      "condition": "immigrants",
+      "exact_actions_and_distances": true,
+      "model_transitions": 491520,
+      "real_actions": 80,
+      "trace_diagnostics": {
+        "observed_wall_contact_frames": 60,
+        "longest_wall_contact_run": 60,
+        "first_observed_crossing_step": null,
+        "last_observed_position": [
+          0.465,
+          0.26277
+        ],
+        "mean_recorded_prefix_entropy_bits": 0.29323943868862923,
+        "prefix_entropy_scope": "First-action entropy of the24 stored, score-ordered plans, not the complete population",
+        "observation_timing": "Pre-action states0..79; final post-action state80 is not in these trace diagnostics"
+      },
+      "trace": "trace-seed217-immigrants.json.gz"
+    },
+    {
+      "seed": 217,
+      "condition": "repeat4",
+      "exact_actions_and_distances": true,
+      "model_transitions": 491520,
+      "real_actions": 80,
+      "trace_diagnostics": {
+        "observed_wall_contact_frames": 60,
+        "longest_wall_contact_run": 60,
+        "first_observed_crossing_step": null,
+        "last_observed_position": [
+          0.465,
+          0.263129
+        ],
+        "mean_recorded_prefix_entropy_bits": 0.23320222705513424,
+        "prefix_entropy_scope": "First-action entropy of the24 stored, score-ordered plans, not the complete population",
+        "observation_timing": "Pre-action states0..79; final post-action state80 is not in these trace diagnostics"
+      },
+      "trace": "trace-seed217-repeat4.json.gz"
+    },
+    {
+      "seed": 217,
+      "condition": "horizon48",
+      "exact_actions_and_distances": true,
+      "model_transitions": 491520,
+      "real_actions": 80,
+      "trace_diagnostics": {
+        "observed_wall_contact_frames": 34,
+        "longest_wall_contact_run": 34,
+        "first_observed_crossing_step": 64,
+        "last_observed_position": [
+          0.754743,
+          0.348663
+        ],
+        "mean_recorded_prefix_entropy_bits": 0.1400236691733424,
+        "prefix_entropy_scope": "First-action entropy of the24 stored, score-ordered plans, not the complete population",
+        "observation_timing": "Pre-action states0..79; final post-action state80 is not in these trace diagnostics"
+      },
+      "trace": "trace-seed217-horizon48.json.gz"
+    },
+    {
+      "seed": 217,
+      "condition": "fresh",
+      "exact_actions_and_distances": true,
+      "model_transitions": 491520,
+      "real_actions": 80,
+      "trace_diagnostics": {
+        "observed_wall_contact_frames": 57,
+        "longest_wall_contact_run": 57,
+        "first_observed_crossing_step": null,
+        "last_observed_position": [
+          0.465,
+          0.272038
+        ],
+        "mean_recorded_prefix_entropy_bits": 1.4685756636828964,
+        "prefix_entropy_scope": "First-action entropy of the24 stored, score-ordered plans, not the complete population",
+        "observation_timing": "Pre-action states0..79; final post-action state80 is not in these trace diagnostics"
+      },
+      "trace": "trace-seed217-fresh.json.gz"
+    },
+    {
+      "seed": 206,
+      "condition": "original",
+      "exact_actions_and_distances": true,
+      "model_transitions": 491520,
+      "real_actions": 80,
+      "trace_diagnostics": {
+        "observed_wall_contact_frames": 9,
+        "longest_wall_contact_run": 9,
+        "first_observed_crossing_step": 37,
+        "last_observed_position": [
+          0.852413,
+          0.694587
+        ],
+        "mean_recorded_prefix_entropy_bits": 0.08253164255367354,
+        "prefix_entropy_scope": "First-action entropy of the24 stored, score-ordered plans, not the complete population",
+        "observation_timing": "Pre-action states0..79; final post-action state80 is not in these trace diagnostics"
+      },
+      "trace": "trace-seed206-original.json.gz"
+    },
+    {
+      "seed": 206,
+      "condition": "fresh",
+      "exact_actions_and_distances": true,
+      "model_transitions": 491520,
+      "real_actions": 80,
+      "trace_diagnostics": {
+        "observed_wall_contact_frames": 21,
+        "longest_wall_contact_run": 21,
+        "first_observed_crossing_step": 67,
+        "last_observed_position": [
+          0.664066,
+          0.575511
+        ],
+        "mean_recorded_prefix_entropy_bits": 1.2579964273332833,
+        "prefix_entropy_scope": "First-action entropy of the24 stored, score-ordered plans, not the complete population",
+        "observation_timing": "Pre-action states0..79; final post-action state80 is not in these trace diagnostics"
+      },
+      "trace": "trace-seed206-fresh.json.gz"
+    }
+  ]
+}

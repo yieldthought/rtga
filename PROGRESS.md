@@ -23,6 +23,8 @@ The first system is running: batched puck simulation, persistent evolutionary se
 
 - [003 · Recall of a rare opening event](papers/003-event-recall.md). Exact replay of the original 2,500 actions and every optimizer update. Repeated training exposure does not produce a usable opening prediction.
 
+- [004 · Search budget and wall traps](papers/004-search-budget.md). Fixed development and confirmation comparisons: individual rescues do not increase held-out success; longer horizons trade away population width and cost more wall time.
+
 Each paper includes the question, method, complete results, limitations, and reproduction commands. Development results and confirmatory comparisons are labelled separately.
 
 ## Current observations, not yet confirmed across seeds
@@ -48,3 +50,7 @@ Papers 001 and 002 have each been rendered and visually checked as two A4 pages.
 ## Reproducible continuation
 
 The observation/action agent can now save and restore its models, optimizer, replay, shifted genomes, and private random generators. Tests resume before fitting, during learning, and after the replay ring wraps; subsequent actions and model parameters match exactly. The caller saves environment state separately. Unbounded Gymnasium vector coordinates use a finite native-unit scale fallback; image encoding is still a separate milestone.
+
+## Next fixed comparison
+
+Study 005 compares planned curiosity, reactive disagreement, and random actions on five new paired seeds in each of the mechanism and noise worlds. Each run receives 2,500 real transitions and the same fitting schedule; planning compute is counted separately. All resulting frozen models are tested on the same three new goals. No setting is selected from this suite’s outcomes.

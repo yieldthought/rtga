@@ -1,0 +1,117 @@
+{
+  "experiment": "fixed_search_budget",
+  "variant": "rooms",
+  "steps": 80,
+  "transitions_per_decision": 6144,
+  "conditions": {
+    "original": {
+      "population": 64,
+      "horizon": 24,
+      "generations": 4,
+      "method": "persistent",
+      "elite_fraction": 0.1,
+      "mutation_rate": null,
+      "crossover": true,
+      "segment_mutation": 0.15,
+      "immigrants": 0.0,
+      "initial_repeat": 1,
+      "seed": 0
+    },
+    "immigrants": {
+      "population": 64,
+      "horizon": 24,
+      "generations": 4,
+      "method": "persistent",
+      "elite_fraction": 0.1,
+      "mutation_rate": null,
+      "crossover": true,
+      "segment_mutation": 0.15,
+      "immigrants": 0.1,
+      "initial_repeat": 1,
+      "seed": 0
+    },
+    "repeat4": {
+      "population": 64,
+      "horizon": 24,
+      "generations": 4,
+      "method": "persistent",
+      "elite_fraction": 0.1,
+      "mutation_rate": null,
+      "crossover": true,
+      "segment_mutation": 0.15,
+      "immigrants": 0.0,
+      "initial_repeat": 4,
+      "seed": 0
+    },
+    "horizon48": {
+      "population": 32,
+      "horizon": 48,
+      "generations": 4,
+      "method": "persistent",
+      "elite_fraction": 0.1,
+      "mutation_rate": null,
+      "crossover": true,
+      "segment_mutation": 0.15,
+      "immigrants": 0.0,
+      "initial_repeat": 1,
+      "seed": 0
+    },
+    "fresh": {
+      "population": 64,
+      "horizon": 24,
+      "generations": 4,
+      "method": "fresh",
+      "elite_fraction": 0.1,
+      "mutation_rate": null,
+      "crossover": true,
+      "segment_mutation": 0.15,
+      "immigrants": 0.0,
+      "initial_repeat": 1,
+      "seed": 0
+    }
+  },
+  "seeds": {
+    "diagnostic": [
+      108,
+      122
+    ],
+    "development": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "confirmation": [
+      200,
+      201,
+      202,
+      203,
+      204,
+      205,
+      206,
+      207,
+      208,
+      209,
+      210,
+      211,
+      212,
+      213,
+      214,
+      215,
+      216,
+      217,
+      218,
+      219
+    ]
+  },
+  "success_radius": 0.06,
+  "discount": 0.99,
+  "confirmation_gate": "At least one persistent variant repairs an original failure on diagnostic seeds108/122, OR improves development success count with no increase in development mean distance. Run all five frozen conditions if the gate passes; no confirmation retuning.",
+  "diagnostic_selection": "108 and122 were selected because original persistence failed in experiment001; they are not representative or held-out confirmation."
+}
