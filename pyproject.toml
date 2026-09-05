@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rtga-research"
+version = "0.1.0"
+description = "Persistent evolutionary planning with online world models and curiosity"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+authors = [{name = "Mark O'Connor"}]
+dependencies = ["numpy>=1.26", "torch>=2.4", "matplotlib>=3.8", "gymnasium>=1.0"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "build>=1"]
+
+[project.scripts]
+rtga = "rtga.cli:main"
+
+[project.urls]
+Repository = "https://github.com/yieldthought/rtga"
+
+[tool.setuptools.packages.find]
+include = ["rtga*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
