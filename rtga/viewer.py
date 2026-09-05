@@ -104,7 +104,7 @@ pre { white-space:pre-wrap; overflow-wrap:anywhere; color:var(--muted); max-heig
 <div class="views">
 <section><div class="section-head"><h2>World and predicted futures</h2><span id="world-label" class="muted mono"></span></div>
 <div class="canvas-wrap"><canvas id="world" role="img" aria-label="Actual trajectory and recorded predicted paths in the environment"></canvas></div>
-<div class="legend"><span><i class="key" style="--key:#dbe6ef"></i>Actual trail</span><span><i class="key" style="--key:#e2c482"></i>Selected future</span><span><i class="key" style="--key:#89b9e8"></i>Other futures</span><span><i class="key" style="--key:#87cfb2"></i>Switch</span><span><i class="key" style="--key:#e8a4b5"></i>Noise source</span></div>
+<div class="legend"><span><i class="key" style="--key:#dbe6ef"></i>Actual trail</span><span><i class="key" style="--key:#e2c482"></i>Selected future / goal</span><span><i class="key" style="--key:#89b9e8"></i>Other futures</span><span id="switch-legend"><i class="key" style="--key:#87cfb2"></i>Switch</span><span id="noise-legend"><i class="key" style="--key:#e8a4b5"></i>Noise source</span></div>
 <p class="note">Futures are predictions stored at this decision. The bright dot is the actual observed position.</p></section>
 <section><div class="section-head"><h2>Population · future actions</h2><span id="population-label" class="muted mono"></span></div>
 <div class="canvas-wrap"><canvas id="population" role="img" aria-label="Recorded action plans by row and future time offset by column"></canvas></div>
@@ -127,6 +127,9 @@ const val = (x, digits=3) => finite(x) ? (Math.abs(x)>0 && Math.abs(x)<.001 ? x.
 const actionColors = ['#637386','#89b9e8','#e8a4b5','#87cfb2','#e2c482','#bbabed','#e9ae82','#81cbd1'];
 const defaultActions = ['no-op','left','right','up','down','interact'];
 const names = meta.action_names || env.action_names || defaultActions;
+const hasSwitch = !env.variant || ['mechanism','noise'].includes(env.variant);
+const hasNoise = !env.variant || env.variant==='noise';
+byId('switch-legend').hidden=!hasSwitch; byId('noise-legend').hidden=!hasNoise;
 const actionName = a => names[a] !== undefined ? String(names[a]) : String(a);
 const color = a => actionColors[((Number(a)||0)%actionColors.length+actionColors.length)%actionColors.length];
 let current=0, playing=false, previousTime=0, dragging=false;
@@ -164,7 +167,7 @@ function world(f) {
   line(c,frames.slice(0,current+1).map(a=>a.state),xy,'#dbe6ef',1.8,.7);
   line(c,f.selected_path,xy,'#e2c482',2.5,.95);
   const state=f.state || [], door=!!state[4];
-  if (finite(env.wall_x)) {
+  if (env.variant!=='open' && finite(env.wall_x)) {
     const dy=Array.isArray(env.door_y)?env.door_y:[0,0];
     const wallWidth=finite(env.wall_half_width)?2*env.wall_half_width*scale:5;
     line(c,[[env.wall_x,0],[env.wall_x,dy[0]]],xy,'#a7b1bb',wallWidth);
@@ -172,10 +175,12 @@ function world(f) {
     c.setLineDash(door?[3,5]:[]); line(c,[[env.wall_x,dy[0]],[env.wall_x,dy[1]]],xy,door?'#87cfb2':'#e2c482',door?1.5:wallWidth); c.setLineDash([]);
   }
   function marker(p,stroke,label,square=false) { if (!Array.isArray(p)||!finite(p[0])||!finite(p[1])) return; const [x,y]=xy(p); c.strokeStyle=stroke; c.lineWidth=1.5; c.fillStyle='#181f27'; c.beginPath(); if(square)c.rect(x-5,y-5,10,10); else c.arc(x,y,6,0,2*Math.PI); c.fill(); c.stroke(); c.fillStyle=stroke; c.textAlign=x>w*.72?'right':'left'; c.fillText(label,x+(x>w*.72?-10:10),y-8); }
-  marker(env.switch,'#87cfb2','switch',true); marker(env.noise_source,'#e8a4b5','noise');
+  if(hasSwitch)marker(env.switch,'#87cfb2','switch',true);
+  if(hasNoise)marker(env.noise_source,'#e8a4b5','noise');
+  marker(env.goal || meta.goal,'#e2c482','goal');
   if(finite(state[0])&&finite(state[1])) { const [x,y]=xy(state); c.beginPath(); c.arc(x,y,finite(env.radius)?env.radius*scale:5,0,2*Math.PI); c.fillStyle='#f1f6f9'; c.fill(); c.strokeStyle='#11161c'; c.lineWidth=1.5; c.stroke(); }
   c.restore(); c.strokeStyle='#738292'; c.lineWidth=1.4; c.strokeRect(left,top,ww,hh);
-  setText('world-label',finite(state[4])?'door '+(door?'open':'closed'):'');
+  setText('world-label',env.variant==='open'?'open arena':env.variant==='rooms'?'open doorway':finite(state[4])?'door '+(door?'open':'closed'):'');
 }
 function population(f) {
   const {c,w,h}=context('population'), plans=f.plans || [], cols=Math.max(1,...plans.map(p=>p.length));

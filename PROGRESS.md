@@ -4,21 +4,35 @@ The target is an agent that learns from observations and actions, explores throu
 
 ## Current work · 5 September 2026
 
-Building the first experimental system: a batched puck simulator, persistent evolutionary planner, three online dynamics models, and a viewer of actual planning traces.
+The first system is running: batched puck simulation, persistent evolutionary search, three online dynamics models, and actual planning traces. The exact-model comparison and a model-calibration study are complete. Initial curiosity runs are exposing failures in learning and using the switch mechanism; an independent second opinion is inspecting the raw traces and predictions.
 
 | Checkpoint | Status | Required evidence |
 |---|---|---|
-| Research plan and repository | In progress | Sources, experiment gates, reproducible package |
-| Exact-model planner | In progress | Paired-seed navigation comparisons and verified traces |
-| Online learned models | In progress | Predictive improvement and actual control |
-| Planned curiosity | Pending | Discovery beyond one-step reach and withheld-goal competence |
+| Research plan and repository | Complete | Public repository and source checkpoints |
+| Exact-model planner | Complete | 240 paired-seed navigation runs; paper 001 |
+| Online learned models | Running | 24 calibration fits; first online goal reached after 340 actions |
+| Planned curiosity | Running | Initial planned/reactive/random comparison; mechanism learning unresolved |
 | Noise and surprise | Pending | Useful uncertainty and measured recovery |
 | Action memory / hierarchy | Pending | Benefit at equal compute |
 | Platformer / Mario | Pending | Curiosity-only learning with no score or progress leakage |
 
 ## Papers
 
-Papers will appear here once measurements exist. Each will include the question, method, complete results, limitations, and exact reproduction commands. Development results and confirmatory comparisons will be labelled separately.
+- [001 · Persistent plans under an exact simulator](papers/001-persistent-planning.md) · [PDF](papers/001-persistent-planning.pdf). Persistence improves average progress and precision, but does not dominate two-room success. Thirty held-out paired seeds per environment; complete outcomes and intervals.
+- [002 · Learning the puck dynamics](papers/002-model-calibration.md). Twenty-four development fits. Rare contact events account for most predictive error; disagreement is an imperfect ranking of error.
+
+Each paper includes the question, method, complete results, limitations, and reproduction commands. Development results and confirmatory comparisons are labelled separately.
+
+## Current observations, not yet confirmed across seeds
+
+- With a supplied goal and learned dynamics, the first open-world run reached the target at action 340, including 256 random warmup actions. This is task-directed control, not curiosity.
+- In the first 2,500-action mechanism run, planned curiosity covered 121 grid cells but never opened the door. Reactive curiosity covered 79 cells and opened it at action 858; random exploration covered 88 and opened it at action 327.
+- All three resulting frozen models reached the two left-room goals but failed the right-room goal from a fresh start. Exploration and reusable mechanism knowledge are therefore separate problems in this prototype.
+- A matched failure replay is preserved for oracle seed 108: persistence stalls at the wall while fresh evolution reaches the goal.
+
+## Artifact inspection
+
+Paper 001 has been rendered and visually checked as two A4 pages. The interactive trace viewer passes serialization and JavaScript interaction checks. Its browser screenshot inspection remains unverified because browser URL policy rejected the local file; no workaround was attempted for that viewer.
 
 ## Research rules
 
@@ -28,4 +42,3 @@ Papers will appear here once measurements exist. Each will include the question,
 - Re-evaluate shifted plans from the actual new observation.
 - Commit runnable checkpoints and their supporting results.
 - Use independent reviews for consequential claims and confusing failures.
-

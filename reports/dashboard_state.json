@@ -1,0 +1,28 @@
+{
+  "title": "RTGA research notebook",
+  "status": "active",
+  "updated_utc": "2026-09-05",
+  "refresh_seconds": 60,
+  "meta": [{"label":"repository","value":"yieldthought/rtga"},{"label":"target","value":"Curiosity-only exploration and control; Mario remains unproven"}],
+  "steps": [
+    {"name":"Exact-model RTGA and comparison suite","status":"complete"},
+    {"name":"Online ensemble dynamics","status":"complete"},
+    {"name":"Curiosity, reactive curiosity, and random exploration","status":"active"},
+    {"name":"Frozen-model goal tests and noise/surprise","status":"pending"},
+    {"name":"Action memory, hierarchy, and pixels","status":"pending"},
+    {"name":"Mario integration and curiosity-only validation","status":"pending"}
+  ],
+  "sections": [
+    {"title":"Current evidence","markdown":"240 held-out navigation runs completed. Persistent RTGA improves average progress and precision, but does not dominate two-room goal success: 26/30 versus 28/30 for fresh evolution. An independent model study attributes most physical prediction error to rare collisions."},
+    {"title":"Read the papers","markdown":"[001 · Persistent planning](../papers/001-persistent-planning.html) · [Research journal](../PROGRESS.md) · [Full research plan](../RESEARCH_PLAN.md)"},
+    {"title":"Next question","markdown":"Does planned model disagreement discover the switch/door mechanism, and do the resulting models support goals withheld during exploration? Fresh random and reactive-curiosity agents use the same interaction and model-update budgets."}
+  ],
+  "tables": [{"title":"First navigation comparison · 30 held-out seeds per environment","columns":[{"key":"environment","label":"environment"},{"key":"method","label":"planner"},{"key":"success","label":"success"},{"key":"mean_distance","label":"mean distance","digits":4}],"rows":[
+    {"environment":"open","method":"persistent","success":"30/30","mean_distance":0.2262},
+    {"environment":"open","method":"fresh","success":"30/30","mean_distance":0.2703},
+    {"environment":"rooms","method":"persistent","success":"26/30","mean_distance":0.2679},
+    {"environment":"rooms","method":"fresh","success":"28/30","mean_distance":0.2958}
+  ]}],
+  "events": [{"time":"2026-09-05","kind":"checkpoint","summary":"Public repository created; exact planner, online ensemble and trace viewer implemented. Held-out navigation comparison complete; first curiosity experiments running."}],
+  "runs": [], "graphs": [], "skill_changes": []
+}

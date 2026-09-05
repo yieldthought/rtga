@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="refresh" content="60">
+<title>RTGA research notebook</title>
+<style>
+@page { size: A4 portrait; margin: 12mm; }
+:root {
+  --paper: #0b0f18;
+  --paper-2: #111827;
+  --paper-3: #192034;
+  --ink: #fff7ed;
+  --muted: #c9c2d5;
+  --rule: rgba(255, 247, 237, 0.16);
+  --rose: #ff9fb7;
+  --coral: #ffb28f;
+  --apricot: #ffd19a;
+  --gold: #f5e58d;
+  --lime: #c8ef9a;
+  --mint: #99ecc0;
+  --aqua: #89efe5;
+  --sky: #96ceff;
+  --blue: #9faeff;
+  --violet: #c5a7ff;
+  --mauve: #f0a7ff;
+}
+html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); }
+body {
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Cambria, Georgia, serif;
+  font-size: 14px;
+  line-height: 1.36;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+main { max-width: 1160px; margin: 0 auto; padding: 28px 24px 42px; position: relative; }
+main::before {
+  content: "";
+  display: block;
+  height: 4px;
+  margin-bottom: 18px;
+  background: linear-gradient(90deg,
+    var(--rose) 0 9%, var(--coral) 9% 18%, var(--apricot) 18% 27%,
+    var(--gold) 27% 36%, var(--lime) 36% 45%, var(--mint) 45% 54%,
+    var(--aqua) 54% 63%, var(--sky) 63% 72%, var(--blue) 72% 81%,
+    var(--violet) 81% 90%, var(--mauve) 90% 100%);
+}
+h1 { color: #fff8ef; font-weight: 400; font-size: 34px; line-height: 1.05; margin: 0 0 7px; }
+h2 { color: var(--gold); font-weight: 400; font-style: italic; font-size: 18px; margin: 26px 0 8px; }
+h3 { margin: 0 0 4px; font-size: 14px; font-style: italic; font-weight: 400; color: var(--ink); }
+.meta { border-top: 1px solid var(--rose); border-bottom: 1px solid var(--aqua); padding: 8px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; font-size: 12px; background: linear-gradient(90deg, rgba(255,159,183,0.08), rgba(137,239,229,0.07), rgba(197,167,255,0.08)); }
+.layout { display: grid; grid-template-columns: 7fr 4fr; gap: 26px; align-items: start; }
+table { width: 100%; border-collapse: collapse; }
+th, td { border-bottom: 1px solid var(--rule); padding: 5px 6px; text-align: left; vertical-align: top; }
+th { color: #fff4c7; border-bottom-color: rgba(255,244,199,0.5); font-style: italic; font-weight: 400; }
+tbody tr:nth-child(11n+1) td:first-child { border-left: 3px solid var(--rose); }
+tbody tr:nth-child(11n+2) td:first-child { border-left: 3px solid var(--coral); }
+tbody tr:nth-child(11n+3) td:first-child { border-left: 3px solid var(--apricot); }
+tbody tr:nth-child(11n+4) td:first-child { border-left: 3px solid var(--gold); }
+tbody tr:nth-child(11n+5) td:first-child { border-left: 3px solid var(--lime); }
+tbody tr:nth-child(11n+6) td:first-child { border-left: 3px solid var(--mint); }
+tbody tr:nth-child(11n+7) td:first-child { border-left: 3px solid var(--aqua); }
+tbody tr:nth-child(11n+8) td:first-child { border-left: 3px solid var(--sky); }
+tbody tr:nth-child(11n+9) td:first-child { border-left: 3px solid var(--blue); }
+tbody tr:nth-child(11n+10) td:first-child { border-left: 3px solid var(--violet); }
+tbody tr:nth-child(11n) td:first-child { border-left: 3px solid var(--mauve); }
+.panel { border-left: 3px solid var(--sky); padding-left: 12px; background: linear-gradient(180deg, rgba(150,206,255,0.08), rgba(240,167,255,0.05)); }
+.active .dot { background: var(--gold); }
+.complete .dot, .success .dot { background: var(--mint); }
+.blocked .dot, .failed .dot, .failure .dot { background: var(--rose); }
+.pending .dot { background: var(--rule); }
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 8px; margin-right: 8px; background: var(--rule); }
+.muted { color: var(--muted); font-style: italic; }
+.graphs { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 10px; }
+.graph { background: rgba(255,247,237,0.025); padding: 7px 8px 4px; border-top: 2px solid var(--coral); }
+.g1 { border-top-color: var(--violet); }
+.g2 { border-top-color: var(--aqua); }
+.g3 { border-top-color: var(--lime); }
+.spark { width: 100%; height: 130px; }
+.spark .series { fill: none; stroke: var(--gold); stroke-width: 2; }
+.g1 .spark .series { stroke: var(--aqua); }
+.g2 .spark .series { stroke: var(--mauve); }
+.g3 .spark .series { stroke: var(--lime); }
+.spark .axis-line { stroke: rgba(255,247,237,0.58); stroke-width: 0.8; }
+.spark .tick-line { stroke: rgba(255,247,237,0.46); stroke-width: 0.8; }
+.spark .grid-line { stroke: rgba(255,247,237,0.11); stroke-width: 0.6; }
+.spark circle { fill: var(--mauve); stroke: var(--paper); stroke-width: 0.8; }
+.spark .bar { stroke: var(--paper); stroke-width: 0.6; }
+.spark .bar-0 { fill: var(--gold); }
+.spark .bar-1 { fill: var(--aqua); }
+.spark .bar-2 { fill: var(--mauve); }
+.spark .bar-3 { fill: var(--lime); }
+.spark text { font: 7px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: var(--ink); }
+.spark .axis-label, .spark .x-label { fill: var(--muted); font-size: 6.5px; }
+.spark .latest-label { fill: var(--ink); font-size: 7.5px; }
+.spark .legend-label { fill: var(--ink); font-size: 6.5px; }
+.skill-change { border-top: 1px solid var(--rule); padding-top: 8px; margin-top: 8px; }
+.change-meta { display: flex; gap: 12px; color: var(--muted); font-style: italic; font-size: 12px; margin-bottom: 6px; }
+.knowledge-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
+.knowledge-entry { border-left: 3px solid var(--aqua); padding: 1px 0 2px 10px; background: rgba(255,247,237,0.018); }
+.knowledge-entry p { margin: 3px 0; }
+.knowledge-entry .votes { margin: 4px 0 0 0; padding-left: 16px; color: var(--muted); font-size: 12px; }
+.k0 { border-left-color: var(--rose); }
+.k1 { border-left-color: var(--coral); }
+.k2 { border-left-color: var(--apricot); }
+.k3 { border-left-color: var(--gold); }
+.k4 { border-left-color: var(--lime); }
+.k5 { border-left-color: var(--mint); }
+.k6 { border-left-color: var(--aqua); }
+.k7 { border-left-color: var(--sky); }
+.k8 { border-left-color: var(--blue); }
+.k9 { border-left-color: var(--violet); }
+.k10 { border-left-color: var(--mauve); }
+.prose p { margin: 4px 0 8px; }
+a { color: var(--sky); }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.9em; }
+section, aside { background: transparent; }
+@media (max-width: 900px) {
+  main { padding: 20px 16px 34px; }
+  .layout { grid-template-columns: 1fr; }
+  h1 { font-size: 28px; }
+}
+</style>
+<script>
+setTimeout(function () { window.location.reload(); }, 60 * 1000);
+</script>
+</head>
+<body>
+<main>
+<h1>RTGA research notebook</h1>
+<div class="meta"><div><span class="muted">repository</span><br>yieldthought/rtga</div><div><span class="muted">target</span><br>Curiosity-only exploration and control; Mario remains unproven</div></div>
+<div class="layout">
+  <section>
+    <h2>runs</h2>
+    <table><tbody><tr><td colspan="1" class="muted">No runs yet.</td></tr></tbody></table>
+    
+    <h2>First navigation comparison · 30 held-out seeds per environment</h2><table><thead><tr><th>environment</th><th>planner</th><th>success</th><th>mean distance</th></tr></thead><tbody><tr class="row-0 "><td>open</td><td>persistent</td><td>30/30</td><td>0.2262</td></tr><tr class="row-1 "><td>open</td><td>fresh</td><td>30/30</td><td>0.2703</td></tr><tr class="row-2 "><td>rooms</td><td>persistent</td><td>26/30</td><td>0.2679</td></tr><tr class="row-3 "><td>rooms</td><td>fresh</td><td>28/30</td><td>0.2958</td></tr></tbody></table>
+    <h2>Current evidence</h2><section class="prose"><p>240 held-out navigation runs completed. Persistent RTGA improves average progress and precision, but does not dominate two-room goal success: 26/30 versus 28/30 for fresh evolution. An independent model study attributes most physical prediction error to rare collisions.</p></section><h2>Read the papers</h2><section class="prose"><p><a href="../papers/001-persistent-planning.html">001 · Persistent planning</a> · <a href="../PROGRESS.md">Research journal</a> · <a href="../RESEARCH_PLAN.md">Full research plan</a></p></section><h2>Next question</h2><section class="prose"><p>Does planned model disagreement discover the switch/door mechanism, and do the resulting models support goals withheld during exploration? Fresh random and reactive-curiosity agents use the same interaction and model-update budgets.</p></section>
+    <h2>activity</h2>
+    <table><thead><tr><th>time</th><th>kind</th><th>summary</th></tr></thead><tbody><tr><td>2026-09-05</td><td>checkpoint</td><td>Public repository created; exact planner, online ensemble and trace viewer implemented. Held-out navigation comparison complete; first curiosity experiments running.</td></tr></tbody></table>
+    <h2>skill changes</h2>
+    <p class="muted">No skill changes recorded yet.</p>
+    <h2>current agent knowledge</h2>
+    <p class="muted">No skill knowledge recorded yet.</p>
+  </section>
+  <aside class="panel">
+    <h2>plan progress</h2>
+    <table><tbody><tr class="complete"><td><span class="dot"></span>Exact-model RTGA and comparison suite</td><td>complete</td></tr><tr class="complete"><td><span class="dot"></span>Online ensemble dynamics</td><td>complete</td></tr><tr class="active"><td><span class="dot"></span>Curiosity, reactive curiosity, and random exploration</td><td>active</td></tr><tr class="pending"><td><span class="dot"></span>Frozen-model goal tests and noise/surprise</td><td>pending</td></tr><tr class="pending"><td><span class="dot"></span>Action memory, hierarchy, and pixels</td><td>pending</td></tr><tr class="pending"><td><span class="dot"></span>Mario integration and curiosity-only validation</td><td>pending</td></tr></tbody></table>
+    <h2>notes</h2>
+    <section class="prose"><p class="muted">No notes yet.</p></section>
+  </aside>
+</div>
+</main>
+</body>
+</html>

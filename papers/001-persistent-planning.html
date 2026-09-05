@@ -1,0 +1,1025 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>001 · Persistent plans under an exact simulator</title><style>
+@page { size:A4 portrait; margin:12mm 14mm 10mm; }
+* { box-sizing:border-box; }
+html,body { margin:0; padding:0; }
+body { color:#181818; background:#fffff8; font:9.2pt/1.3 'Iowan Old Style','Palatino Linotype',Palatino,'Book Antiqua',Cambria,Georgia,serif; print-color-adjust:exact; -webkit-print-color-adjust:exact; }
+.page { max-width:182mm; margin:0 auto; padding:0; break-after:page; }
+.page:last-child { break-after:auto; }
+header { margin-bottom:4mm; }
+.kicker { font-size:8pt; letter-spacing:.08em; text-transform:uppercase; color:#666; }
+h1 { font-size:24pt; line-height:1.05; font-weight:normal; margin:3mm 0; }
+h2 { font-size:11.5pt; font-style:italic; font-weight:normal; margin:3.5mm 0 1.5mm; }
+p { margin:1.5mm 0 2.5mm; }
+.meta { border-top:.5pt solid #888; padding-top:2mm; color:#6f2929; font-size:8pt; }
+.with-note { display:grid; grid-template-columns:3.1fr 1fr; gap:6mm; align-items:start; }
+aside { font-size:8pt; line-height:1.35; color:#555; padding-top:3mm; }
+figure { margin:3mm 0 2mm; }
+svg { width:100%; height:auto; display:block; }
+figcaption,.note { font-size:8pt; color:#555; }
+table { width:100%; border-collapse:collapse; font-size:8.1pt; margin:2mm 0; font-variant-numeric:tabular-nums; }
+th { border-block:.5pt solid #888; font-style:italic; font-weight:normal; text-align:right; padding:1.2mm .8mm; }
+td { border-bottom:.3pt solid #d0d0ca; padding:1.1mm .8mm; text-align:right; white-space:nowrap; }
+td:first-child,th:first-child { text-align:left; white-space:normal; }
+small { display:block; font-size:7.8pt; color:#555; }
+a { color:#6e2b2b; text-decoration:none; }
+.provenance { font-size:8pt; overflow-wrap:anywhere; }
+code,pre { font:7.5pt/1.3 ui-monospace,SFMono-Regular,Consolas,monospace; }
+pre { white-space:pre-wrap; overflow-wrap:anywhere; border-left:1pt solid #b7a19e; padding-left:2mm; margin:2mm 0; }
+@media screen { body { padding:8mm 4mm; } .page+.page { border-top:1px solid #c8c8c0; margin-top:8mm; padding-top:6mm; } }
+@media screen and (max-width:620px) { .with-note { grid-template-columns:1fr; gap:0; } aside { border-left:1px solid #ccc; padding:0 0 0 3mm; } table { font-size:7.8pt; } }
+</style></head><body>
+<article class="page"><header><div class="kicker">RTGA · experiment 001</div><h1>Persistent plans<br>under an exact simulator</h1><div class="meta">Confirmation run · clean working tree<br>2026-09-05 10:02 UTC · 240 recorded runs</div></header>
+<div class="with-note"><section><h2>Abstract</h2><p>We compared persistent action-plan populations with fresh evolution, random shooting and categorical CEM using exact dynamics in a unit-square puck task. Each run contained 80 actions; the protocol declared 30 paired seeds per environment. In open, observed successes were Persistent RTGA 30/30; Fresh evolution 30/30; Random shooting 30/30; Categorical CEM 30/30. In rooms, observed successes were Persistent RTGA 26/30; Fresh evolution 28/30; Random shooting 26/30; Categorical CEM 27/30. These tests isolate search behavior with a supplied objective. They do not test learned dynamics, curiosity or transfer.</p></section><aside>Question: does keeping a living population improve navigation when the simulator and objective are already known?<br><br>This is the planner diagnostic. Learned models and autonomous curiosity are separate experiments.</aside></div>
+<figure><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="511.2pt" height="158.4pt" viewBox="0 0 511.2 158.4" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.1, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 158.4 
+L 511.2 158.4 
+L 511.2 0 
+L 0 0 
+L 0 158.4 
+z
+" style="fill: none"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 46.008 112.464 
+L 257.053872 112.464 
+L 257.053872 22.176 
+L 46.008 22.176 
+L 46.008 112.464 
+z
+" style="fill: none"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <defs>
+       <path id="m40bc9e9e9f" d="M 0 0 
+L 0 3 
+" style="stroke: #999999; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#m40bc9e9e9f" x="53.172388" y="112.464" style="fill: #999999; stroke: #999999; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_1">
+      <text style="font-size: 9px; font-family: 'DejaVu Serif', 'Bitstream Vera Serif', 'Computer Modern Roman', 'New Century Schoolbook', 'Century Schoolbook L', 'Utopia', 'ITC Bookman', 'Bookman', 'Nimbus Roman No9 L', 'Times New Roman', 'Times', 'Palatino', 'Charter', serif; text-anchor: middle" x="53.172388" y="125.801891" transform="rotate(-0 53.172388 125.801891)">0</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2">
+      <g>
+       <use xlink:href="#m40bc9e9e9f" x="101.74451" y="112.464" style="fill: #999999; stroke: #999999; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_2">
+      <text style="font-size: 9px; font-family: 'DejaVu Serif', 'Bitstream Vera Serif', 'Computer Modern Roman', 'New Century Schoolbook', 'Century Schoolbook L', 'Utopia', 'ITC Bookman', 'Bookman', 'Nimbus Roman No9 L', 'Times New Roman', 'Times', 'Palatino', 'Charter', serif; text-anchor: middle" x="101.74451" y="125.801891" transform="rotate(-0 101.74451 125.801891)">20</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_3">
+      <g>
+       <use xlink:href="#m40bc9e9e9f" x="150.316633" y="112.464" style="fill: #999999; stroke: #999999; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_3">
+      <text style="font-size: 9px; font-family: 'DejaVu Serif', 'Bitstream Vera Serif', 'Computer Modern Roman', 'New Century Schoolbook', 'Century Schoolbook L', 'Utopia', 'ITC Bookman', 'Bookman', 'Nimbus Roman No9 L', 'Times New Roman', 'Times', 'Palatino', 'Charter', serif; text-anchor: middle" x="150.316633" y="125.801891" transform="rotate(-0 150.316633 125.801891)">40</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_4">
+      <g>
+       <use xlink:href="#m40bc9e9e9f" x="198.888755" y="112.464" style="fill: #999999; stroke: #999999; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_4">
+      <text style="font-size: 9px; font-family: 'DejaVu Serif', 'Bitstream Vera Serif', 'Computer Modern Roman', 'New Century Schoolbook', 'Century Schoolbook L', 'Utopia', 'ITC Bookman', 'Bookman', 'Nimbus Roman No9 L', 'Times New Roman', 'Times', 'Palatino', 'Charter', serif; text-anchor: middle" x="198.888755" y="125.801891" transform="rotate(-0 198.888755 125.801891)">60</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_5">
+      <g>
+       <use xlink:href="#m40bc9e9e9f" x="247.460877" y="112.464" style="fill: #999999; stroke: #999999; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_5">
+      <text style="font-size: 9px; font-family: 'DejaVu Serif', 'Bitstream Vera Serif', 'Computer Modern Roman', 'New Century Schoolbook', 'Century Schoolbook L', 'Utopia', 'ITC Bookman', 'Bookman', 'Nimbus Roman No9 L', 'Times New Roman', 'Times', 'Palatino', 'Charter', serif; text-anchor: middle" x="247.460877" y="125.801891" transform="rotate(-0 247.460877 125.801891)">80</text>
+     </g>
+    </g>
+    <g id="text_6">
+     <text style="font-size: 9px; font-family: 'DejaVu Serif', 'Bitstream Vera Serif', 'Computer Modern Roman', 'New Century Schoolbook', 'Century Schoolbook L', 'Utopia', 'ITC Bookman', 'Bookman', 'Nimbus Roman No9 L', 'Times New Roman', 'Times', 'Palatino', 'Charter', serif; text-anchor: middle" x="151.530936" y="138.802594" transform="rotate(-0 151.530936 138.802594)">Executed actions</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_6">
+      <defs>
+       <path id="m4ef07118d7" d="M 0 0 
+L -3 0 
+" style="stroke: #999999; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#m4ef07118d7" x="46.008" y="112.464" style="fill: #999999; stroke: #999999; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_7">
+      <text style="font-size: 9px; font-family: 'DejaVu Serif', 'Bitstream Vera Serif', 'Computer Modern Roman', 'New Century Schoolbook', 'Century Schoolbook L', 'Utopia', 'ITC Bookman', 'Bookman', 'Nimbus Roman No9 L', 'Times New Roman', 'Times', 'Palatino', 'Charter', serif; text-anchor: end" x="39.508" y="115.882945" transform="rotate(-0 39.508 115.882945)">0.0</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_7">
+      <g>
+       <use xlink:href="#m4ef07118d7" x="46.008" y="89.419144" style="fill: #999999; stroke: #999999; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_8">
+      <text style="font-size: 9px; font-family: 'DejaVu Serif', 'Bitstream Vera Serif', 'Computer Modern Roman', 'New Century Schoolbook', 'Century Schoolbook L', 'Utopia', 'ITC Bookman', 'Bookman', 'Nimbus Roman No9 L', 'Times New Roman', 'Times', 'Palatino', 'Charter', serif; text-anchor: end" x="39.508" y="92.838089" transform="rotate(-0 39.508 92.838089)">0.2</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_8">
+      <g>
+       <use xlink:href="#m4ef07118d7" x="46.008" y="66.374288" style="fill: #999999; stroke: #999999; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_9">
+      <text style="font-size: 9px; font-family: 'DejaVu Serif', 'Bitstream Vera Serif', 'Computer Modern Roman', 'New Century Schoolbook', 'Century Schoolbook L', 'Utopia', 'ITC Bookman', 'Bookman', 'Nimbus Roman No9 L', 'Times New Roman', 'Times', 'Palatino', 'Charter', serif; text-anchor: end" x="39.508" y="69.793233" transform="rotate(-0 39.508 69.793233)">0.4</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_9">
+      <g>
+       <use xlink:href="#m4ef07118d7" x="46.008" y="43.329432" style="fill: #999999; stroke: #999999; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_10">
+      <text style="font-size: 9px; font-family: 'DejaVu Serif', 'Bitstream Vera Serif', 'Computer Modern Roman', 'New Century Schoolbook', 'Century Schoolbook L', 'Utopia', 'ITC Bookman', 'Bookman', 'Nimbus Roman No9 L', 'Times New Roman', 'Times', 'Palatino', 'Charter', serif; text-anchor: end" x="39.508" y="46.748377" transform="rotate(-0 39.508 46.748377)">0.6</text>
+     </g>
+    </g>
+    <g id="text_11">
+     <text style="font-size: 9px; font-family: 'DejaVu Serif', 'Bitstream Vera Serif', 'Computer Modern Roman', 'New Century Schoolbook', 'Century Schoolbook L', 'Utopia', 'ITC Bookman', 'Bookman', 'Nimbus Roman No9 L', 'Times New Roman', 'Times', 'Palatino', 'Charter', serif; text-anchor: middle" x="19.033078" y="67.32" transform="rotate(-90 19.033078 67.32)">Mean distance to goal</text>
+    </g>
+   </g>
+   <g id="line2d_10">
+    <path d="M 55.600994 26.524245 
+L 58.0296 27.024116 
+L 60.458206 27.778144 
+L 62.886813 28.746496 
+L 65.315419 29.919955 
+L 67.744025 31.274803 
+L 70.172631 32.788293 
+L 72.601237 34.438184 
+L 75.029843 36.208453 
+L 77.458449 38.077129 
+L 79.887055 40.03485 
+L 82.315661 42.070823 
+L 84.744268 44.17313 
+L 87.172874 46.330912 
+L 89.60148 48.529763 
+L 92.030086 50.766303 
+L 94.458692 53.028581 
+L 96.887298 55.30966 
+L 99.315904 57.598938 
+L 101.74451 59.892612 
+L 104.173117 62.189788 
+L 106.601723 64.479501 
+L 109.030329 66.765417 
+L 111.458935 69.030736 
+L 113.887541 71.28969 
+L 116.316147 73.536433 
+L 118.744753 75.763281 
+L 121.173359 77.966787 
+L 123.601965 80.144484 
+L 126.030572 82.296796 
+L 128.459178 84.416143 
+L 130.887784 86.500509 
+L 133.31639 88.554052 
+L 135.744996 90.602004 
+L 138.173602 92.628053 
+L 140.602208 94.618798 
+L 143.030814 96.523518 
+L 145.45942 98.30797 
+L 147.888027 99.95813 
+L 150.316633 101.469872 
+L 152.745239 102.880937 
+L 155.173845 104.185707 
+L 157.602451 105.390865 
+L 160.031057 106.551568 
+L 162.459663 107.674856 
+L 164.888269 108.699915 
+L 167.316876 109.577163 
+L 169.745482 110.277416 
+L 172.174088 110.766341 
+L 174.602694 111.081767 
+L 177.0313 111.339318 
+L 179.459906 111.568923 
+L 181.888512 111.743846 
+L 184.317118 111.860412 
+L 186.745724 112.020467 
+L 189.174331 112.145183 
+L 191.602937 112.235141 
+L 194.031543 112.248151 
+L 196.460149 112.298478 
+L 198.888755 112.311253 
+L 201.317361 112.3294 
+L 203.745967 112.341741 
+L 206.174573 112.353596 
+L 208.60318 112.358344 
+L 211.031786 112.380263 
+L 213.460392 112.351193 
+L 215.888998 112.355108 
+L 218.317604 112.354274 
+L 220.74621 112.374984 
+L 223.174816 112.385865 
+L 225.603422 112.388493 
+L 228.032028 112.372498 
+L 230.460635 112.361285 
+L 232.889241 112.353867 
+L 235.317847 112.367809 
+L 237.746453 112.378772 
+L 240.175059 112.372899 
+L 242.603665 112.388637 
+L 245.032271 112.368874 
+L 247.460877 112.363985 
+" clip-path="url(#p9f1b482145)" style="fill: none; stroke: #8a1a1a; stroke-width: 1.9; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_11">
+    <path d="M 55.600994 26.524245 
+L 58.0296 27.007241 
+L 60.458206 27.657248 
+L 62.886813 28.473876 
+L 65.315419 29.425133 
+L 67.744025 30.489215 
+L 70.172631 31.652675 
+L 72.601237 32.919641 
+L 75.029843 34.27268 
+L 77.458449 35.74214 
+L 79.887055 37.304271 
+L 82.315661 38.912392 
+L 84.744268 40.581188 
+L 87.172874 42.270174 
+L 89.60148 43.961354 
+L 92.030086 45.669867 
+L 94.458692 47.423968 
+L 96.887298 49.168861 
+L 99.315904 50.940277 
+L 101.74451 52.755551 
+L 104.173117 54.581095 
+L 106.601723 56.429464 
+L 109.030329 58.28854 
+L 111.458935 60.099087 
+L 113.887541 61.929515 
+L 116.316147 63.753848 
+L 118.744753 65.555757 
+L 121.173359 67.348974 
+L 123.601965 69.1258 
+L 126.030572 70.914662 
+L 128.459178 72.724828 
+L 130.887784 74.541591 
+L 133.31639 76.38191 
+L 135.744996 78.260201 
+L 138.173602 80.164879 
+L 140.602208 82.108858 
+L 143.030814 84.058113 
+L 145.45942 86.006546 
+L 147.888027 87.939013 
+L 150.316633 89.855463 
+L 152.745239 91.704859 
+L 155.173845 93.488569 
+L 157.602451 95.200137 
+L 160.031057 96.841585 
+L 162.459663 98.421976 
+L 164.888269 99.943514 
+L 167.316876 101.418114 
+L 169.745482 102.754432 
+L 172.174088 104.027501 
+L 174.602694 105.247898 
+L 177.0313 106.267349 
+L 179.459906 107.126084 
+L 181.888512 107.901744 
+L 184.317118 108.562111 
+L 186.745724 109.115529 
+L 189.174331 109.565273 
+L 191.602937 109.981975 
+L 194.031543 110.392406 
+L 196.460149 110.757719 
+L 198.888755 111.0535 
+L 201.317361 111.25381 
+L 203.745967 111.361681 
+L 206.174573 111.43074 
+L 208.60318 111.478811 
+L 211.031786 111.534105 
+L 213.460392 111.584093 
+L 215.888998 111.630664 
+L 218.317604 111.710632 
+L 220.74621 111.728004 
+L 223.174816 111.749962 
+L 225.603422 111.73505 
+L 228.032028 111.729835 
+L 230.460635 111.75837 
+L 232.889241 111.745011 
+L 235.317847 111.737456 
+L 237.746453 111.731751 
+L 240.175059 111.727118 
+L 242.603665 111.765674 
+L 245.032271 111.709001 
+L 247.460877 111.753412 
+" clip-path="url(#p9f1b482145)" style="fill: none; stroke-dasharray: 4.44,1.92; stroke-dashoffset: 0; stroke: #467b91; stroke-width: 1.2"/>
+   </g>
+   <g id="line2d_12">
+    <path d="M 55.600994 26.47184 
+L 58.0296 26.849173 
+L 60.458206 27.408575 
+L 62.886813 28.104741 
+L 65.315419 28.929424 
+L 67.744025 29.832911 
+L 70.172631 30.816784 
+L 72.601237 31.89618 
+L 75.029843 33.060625 
+L 77.458449 34.295258 
+L 79.887055 35.588003 
+L 82.315661 36.948225 
+L 84.744268 38.361034 
+L 87.172874 39.818944 
+L 89.60148 41.309571 
+L 92.030086 42.860337 
+L 94.458692 44.425868 
+L 96.887298 46.027023 
+L 99.315904 47.677934 
+L 101.74451 49.328608 
+L 104.173117 50.989272 
+L 106.601723 52.696762 
+L 109.030329 54.418911 
+L 111.458935 56.150328 
+L 113.887541 57.879576 
+L 116.316147 59.651016 
+L 118.744753 61.388023 
+L 121.173359 63.134084 
+L 123.601965 64.913421 
+L 126.030572 66.699151 
+L 128.459178 68.489181 
+L 130.887784 70.284863 
+L 133.31639 72.106179 
+L 135.744996 73.870166 
+L 138.173602 75.6181 
+L 140.602208 77.378904 
+L 143.030814 79.161351 
+L 145.45942 80.933887 
+L 147.888027 82.693659 
+L 150.316633 84.430225 
+L 152.745239 86.172914 
+L 155.173845 87.902861 
+L 157.602451 89.61917 
+L 160.031057 91.305191 
+L 162.459663 92.965816 
+L 164.888269 94.590072 
+L 167.316876 96.199754 
+L 169.745482 97.701056 
+L 172.174088 99.124749 
+L 174.602694 100.4797 
+L 177.0313 101.727812 
+L 179.459906 102.831096 
+L 181.888512 103.888895 
+L 184.317118 104.858328 
+L 186.745724 105.778071 
+L 189.174331 106.606403 
+L 191.602937 107.367548 
+L 194.031543 108.074832 
+L 196.460149 108.711208 
+L 198.888755 109.242864 
+L 201.317361 109.665816 
+L 203.745967 110.085584 
+L 206.174573 110.515742 
+L 208.60318 110.849532 
+L 211.031786 111.020832 
+L 213.460392 111.08594 
+L 215.888998 111.1131 
+L 218.317604 111.180173 
+L 220.74621 111.297966 
+L 223.174816 111.403184 
+L 225.603422 111.568013 
+L 228.032028 111.648834 
+L 230.460635 111.659937 
+L 232.889241 111.686752 
+L 235.317847 111.681197 
+L 237.746453 111.689732 
+L 240.175059 111.667037 
+L 242.603665 111.69048 
+L 245.032271 111.655677 
+L 247.460877 111.59324 
+" clip-path="url(#p9f1b482145)" style="fill: none; stroke-dasharray: 1.2,1.98; stroke-dashoffset: 0; stroke: #8a7750; stroke-width: 1.2"/>
+   </g>
+   <g id="line2d_13">
+    <path d="M 55.600994 26.572987 
+L 58.0296 27.167315 
+L 60.458206 28.00507 
+L 62.886813 29.049748 
+L 65.315419 30.291118 
+L 67.744025 31.693172 
+L 70.172631 33.242613 
+L 72.601237 34.900228 
+L 75.029843 36.646941 
+L 77.458449 38.481673 
+L 79.887055 40.363956 
+L 82.315661 42.312392 
+L 84.744268 44.340862 
+L 87.172874 46.414125 
+L 89.60148 48.53037 
+L 92.030086 50.693585 
+L 94.458692 52.876315 
+L 96.887298 55.070353 
+L 99.315904 57.279182 
+L 101.74451 59.512928 
+L 104.173117 61.749139 
+L 106.601723 63.998448 
+L 109.030329 66.261518 
+L 111.458935 68.526794 
+L 113.887541 70.791494 
+L 116.316147 73.051729 
+L 118.744753 75.295889 
+L 121.173359 77.526004 
+L 123.601965 79.743984 
+L 126.030572 81.951626 
+L 128.459178 84.122971 
+L 130.887784 86.242354 
+L 133.31639 88.291043 
+L 135.744996 90.282486 
+L 138.173602 92.245737 
+L 140.602208 94.17179 
+L 143.030814 96.002001 
+L 145.45942 97.764997 
+L 147.888027 99.441076 
+L 150.316633 100.988628 
+L 152.745239 102.480643 
+L 155.173845 103.86508 
+L 157.602451 105.046127 
+L 160.031057 106.105538 
+L 162.459663 106.997102 
+L 164.888269 107.866822 
+L 167.316876 108.640698 
+L 169.745482 109.302127 
+L 172.174088 109.862052 
+L 174.602694 110.342126 
+L 177.0313 110.724798 
+L 179.459906 110.999587 
+L 181.888512 111.198763 
+L 184.317118 111.288262 
+L 186.745724 111.297538 
+L 189.174331 111.329385 
+L 191.602937 111.398552 
+L 194.031543 111.475327 
+L 196.460149 111.514469 
+L 198.888755 111.497487 
+L 201.317361 111.519873 
+L 203.745967 111.593226 
+L 206.174573 111.690901 
+L 208.60318 111.732917 
+L 211.031786 111.72925 
+L 213.460392 111.795669 
+L 215.888998 111.832104 
+L 218.317604 111.835072 
+L 220.74621 111.806069 
+L 223.174816 111.765607 
+L 225.603422 111.793602 
+L 228.032028 111.810788 
+L 230.460635 111.774511 
+L 232.889241 111.788691 
+L 235.317847 111.819345 
+L 237.746453 111.821485 
+L 240.175059 111.855855 
+L 242.603665 111.833641 
+L 245.032271 111.823207 
+L 247.460877 111.864279 
+" clip-path="url(#p9f1b482145)" style="fill: none; stroke-dasharray: 7.68,1.92,1.2,1.92; stroke-dashoffset: 0; stroke: #72715e; stroke-width: 1.2"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 46.008 112.464 
+L 46.008 22.176 
+" style="fill: none; stroke: #aaaaaa; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 46.008 112.464 
+L 257.053872 112.464 
+" style="fill: none; stroke: #aaaaaa; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_12">
+    <text style="font-style: italic; font-size: 11px; font-family: 'DejaVu Serif', 'Bitstream Vera Serif', 'Computer Modern Roman', 'New Century Schoolbook', 'Century Schoolbook L', 'Utopia', 'ITC Bookman', 'Bookman', 'Nimbus Roman No9 L', 'Times New Roman', 'Times', 'Palatino', 'Charter', serif; text-anchor: start" x="46.008" y="16.176" transform="rotate(-0 46.008 16.176)">open</text>
+   </g>
+  </g>
+  <g id="axes_2">
+   <g id="patch_5">
+    <path d="M 295.042128 112.464 
+L 506.088 112.464 
+L 506.088 22.176 
+L 295.042128 22.176 
+L 295.042128 112.464 
+z
+" style="fill: none"/>
+   </g>
+   <g id="matplotlib.axis_3">
+    <g id="xtick_6">
+     <g id="line2d_14">
+      <g>
+       <use xlink:href="#m40bc9e9e9f" x="302.206516" y="112.464" style="fill: #999999; stroke: #999999; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_13">
+      <text style="font-size: 9px; font-family: 'DejaVu Serif', 'Bitstream Vera Serif', 'Computer Modern Roman', 'New Century Schoolbook', 'Century Schoolbook L', 'Utopia', 'ITC Bookman', 'Bookman', 'Nimbus Roman No9 L', 'Times New Roman', 'Times', 'Palatino', 'Charter', serif; text-anchor: middle" x="302.206516" y="125.801891" transform="rotate(-0 302.206516 125.801891)">0</text>
+     </g>
+    </g>
+    <g id="xtick_7">
+     <g id="line2d_15">
+      <g>
+       <use xlink:href="#m40bc9e9e9f" x="350.778639" y="112.464" style="fill: #999999; stroke: #999999; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_14">
+      <text style="font-size: 9px; font-family: 'DejaVu Serif', 'Bitstream Vera Serif', 'Computer Modern Roman', 'New Century Schoolbook', 'Century Schoolbook L', 'Utopia', 'ITC Bookman', 'Bookman', 'Nimbus Roman No9 L', 'Times New Roman', 'Times', 'Palatino', 'Charter', serif; text-anchor: middle" x="350.778639" y="125.801891" transform="rotate(-0 350.778639 125.801891)">20</text>
+     </g>
+    </g>
+    <g id="xtick_8">
+     <g id="line2d_16">
+      <g>
+       <use xlink:href="#m40bc9e9e9f" x="399.350761" y="112.464" style="fill: #999999; stroke: #999999; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_15">
+      <text style="font-size: 9px; font-family: 'DejaVu Serif', 'Bitstream Vera Serif', 'Computer Modern Roman', 'New Century Schoolbook', 'Century Schoolbook L', 'Utopia', 'ITC Bookman', 'Bookman', 'Nimbus Roman No9 L', 'Times New Roman', 'Times', 'Palatino', 'Charter', serif; text-anchor: middle" x="399.350761" y="125.801891" transform="rotate(-0 399.350761 125.801891)">40</text>
+     </g>
+    </g>
+    <g id="xtick_9">
+     <g id="line2d_17">
+      <g>
+       <use xlink:href="#m40bc9e9e9f" x="447.922883" y="112.464" style="fill: #999999; stroke: #999999; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_16">
+      <text style="font-size: 9px; font-family: 'DejaVu Serif', 'Bitstream Vera Serif', 'Computer Modern Roman', 'New Century Schoolbook', 'Century Schoolbook L', 'Utopia', 'ITC Bookman', 'Bookman', 'Nimbus Roman No9 L', 'Times New Roman', 'Times', 'Palatino', 'Charter', serif; text-anchor: middle" x="447.922883" y="125.801891" transform="rotate(-0 447.922883 125.801891)">60</text>
+     </g>
+    </g>
+    <g id="xtick_10">
+     <g id="line2d_18">
+      <g>
+       <use xlink:href="#m40bc9e9e9f" x="496.495006" y="112.464" style="fill: #999999; stroke: #999999; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_17">
+      <text style="font-size: 9px; font-family: 'DejaVu Serif', 'Bitstream Vera Serif', 'Computer Modern Roman', 'New Century Schoolbook', 'Century Schoolbook L', 'Utopia', 'ITC Bookman', 'Bookman', 'Nimbus Roman No9 L', 'Times New Roman', 'Times', 'Palatino', 'Charter', serif; text-anchor: middle" x="496.495006" y="125.801891" transform="rotate(-0 496.495006 125.801891)">80</text>
+     </g>
+    </g>
+    <g id="text_18">
+     <text style="font-size: 9px; font-family: 'DejaVu Serif', 'Bitstream Vera Serif', 'Computer Modern Roman', 'New Century Schoolbook', 'Century Schoolbook L', 'Utopia', 'ITC Bookman', 'Bookman', 'Nimbus Roman No9 L', 'Times New Roman', 'Times', 'Palatino', 'Charter', serif; text-anchor: middle" x="400.565064" y="138.802594" transform="rotate(-0 400.565064 138.802594)">Executed actions</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_4">
+    <g id="ytick_5">
+     <g id="line2d_19">
+      <g>
+       <use xlink:href="#m4ef07118d7" x="295.042128" y="112.464" style="fill: #999999; stroke: #999999; stroke-width: 0.8"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_6">
+     <g id="line2d_20">
+      <g>
+       <use xlink:href="#m4ef07118d7" x="295.042128" y="89.419144" style="fill: #999999; stroke: #999999; stroke-width: 0.8"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_7">
+     <g id="line2d_21">
+      <g>
+       <use xlink:href="#m4ef07118d7" x="295.042128" y="66.374288" style="fill: #999999; stroke: #999999; stroke-width: 0.8"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_8">
+     <g id="line2d_22">
+      <g>
+       <use xlink:href="#m4ef07118d7" x="295.042128" y="43.329432" style="fill: #999999; stroke: #999999; stroke-width: 0.8"/>
+      </g>
+     </g>
+    </g>
+   </g>
+   <g id="line2d_23">
+    <path d="M 304.635123 26.524245 
+L 307.063729 27.035456 
+L 309.492335 27.799457 
+L 311.920941 28.776574 
+L 314.349547 29.952147 
+L 316.778153 31.304102 
+L 319.206759 32.815316 
+L 321.635365 34.463574 
+L 324.063972 36.22833 
+L 326.492578 38.092986 
+L 328.921184 40.032007 
+L 331.34979 42.044583 
+L 333.778396 44.10706 
+L 336.207002 46.211948 
+L 338.635608 48.356193 
+L 341.064214 50.510182 
+L 343.49282 52.62732 
+L 345.921427 54.708282 
+L 348.350033 56.729649 
+L 350.778639 58.61106 
+L 353.207245 60.307561 
+L 355.635851 61.941838 
+L 358.064457 63.572233 
+L 360.493063 65.188329 
+L 362.921669 66.8048 
+L 365.350276 68.439239 
+L 367.778882 70.089673 
+L 370.207488 71.771654 
+L 372.636094 73.484372 
+L 375.0647 75.219671 
+L 377.493306 76.969045 
+L 379.921912 78.736043 
+L 382.350518 80.528185 
+L 384.779124 82.351001 
+L 387.207731 84.193289 
+L 389.636337 86.044955 
+L 392.064943 87.878196 
+L 394.493549 89.682046 
+L 396.922155 91.440875 
+L 399.350761 93.12806 
+L 401.779367 94.774705 
+L 404.207973 96.336353 
+L 406.63658 97.790815 
+L 409.065186 99.178769 
+L 411.493792 100.491999 
+L 413.922398 101.679521 
+L 416.351004 102.730621 
+L 418.77961 103.567472 
+L 421.208216 104.176576 
+L 423.636822 104.583824 
+L 426.065428 104.905466 
+L 428.494035 105.185774 
+L 430.922641 105.398013 
+L 433.351247 105.583669 
+L 435.779853 105.807047 
+L 438.208459 105.997042 
+L 440.637065 106.149767 
+L 443.065671 106.26655 
+L 445.494277 106.341741 
+L 447.922883 106.393764 
+L 450.35149 106.442702 
+L 452.780096 106.441226 
+L 455.208702 106.440099 
+L 457.637308 106.449572 
+L 460.065914 106.449799 
+L 462.49452 106.448699 
+L 464.923126 106.452443 
+L 467.351732 106.44229 
+L 469.780339 106.465904 
+L 472.208945 106.48216 
+L 474.637551 106.486546 
+L 477.066157 106.460205 
+L 479.494763 106.455378 
+L 481.923369 106.465225 
+L 484.351975 106.456312 
+L 486.780581 106.462632 
+L 489.209187 106.46002 
+L 491.637794 106.455975 
+L 494.0664 106.475356 
+L 496.495006 106.468122 
+" clip-path="url(#pe04d79ae6e)" style="fill: none; stroke: #8a1a1a; stroke-width: 1.9; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_24">
+    <path d="M 304.635123 26.524245 
+L 307.063729 27.007241 
+L 309.492335 27.657248 
+L 311.920941 28.473876 
+L 314.349547 29.439702 
+L 316.778153 30.51663 
+L 319.206759 31.701266 
+L 321.635365 32.995891 
+L 324.063972 34.37304 
+L 326.492578 35.863763 
+L 328.921184 37.465091 
+L 331.34979 39.104556 
+L 333.778396 40.811756 
+L 336.207002 42.560538 
+L 338.635608 44.299602 
+L 341.064214 46.095105 
+L 343.49282 47.91407 
+L 345.921427 49.731389 
+L 348.350033 51.54093 
+L 350.778639 53.337823 
+L 353.207245 55.036268 
+L 355.635851 56.621826 
+L 358.064457 58.070073 
+L 360.493063 59.495899 
+L 362.921669 60.94263 
+L 365.350276 62.441206 
+L 367.778882 63.931058 
+L 370.207488 65.408346 
+L 372.636094 66.850965 
+L 375.0647 68.308914 
+L 377.493306 69.816775 
+L 379.921912 71.319503 
+L 382.350518 72.843358 
+L 384.779124 74.418694 
+L 387.207731 76.022173 
+L 389.636337 77.642429 
+L 392.064943 79.277453 
+L 394.493549 80.965793 
+L 396.922155 82.658852 
+L 399.350761 84.376995 
+L 401.779367 86.103451 
+L 404.207973 87.785075 
+L 406.63658 89.407043 
+L 409.065186 90.945124 
+L 411.493792 92.443153 
+L 413.922398 93.893895 
+L 416.351004 95.300866 
+L 418.77961 96.603355 
+L 421.208216 97.895919 
+L 423.636822 99.136894 
+L 426.065428 100.261879 
+L 428.494035 101.240856 
+L 430.922641 102.095865 
+L 433.351247 102.883161 
+L 435.779853 103.570484 
+L 438.208459 104.157932 
+L 440.637065 104.712754 
+L 443.065671 105.277537 
+L 445.494277 105.78331 
+L 447.922883 106.260023 
+L 450.35149 106.642973 
+L 452.780096 106.952573 
+L 455.208702 107.229762 
+L 457.637308 107.464412 
+L 460.065914 107.665874 
+L 462.49452 107.793363 
+L 464.923126 107.869897 
+L 467.351732 107.96695 
+L 469.780339 107.987002 
+L 472.208945 108.016738 
+L 474.637551 108.125218 
+L 477.066157 108.249665 
+L 479.494763 108.396226 
+L 481.923369 108.462042 
+L 484.351975 108.542318 
+L 486.780581 108.613033 
+L 489.209187 108.67301 
+L 491.637794 108.741214 
+L 494.0664 108.751065 
+L 496.495006 108.83855 
+" clip-path="url(#pe04d79ae6e)" style="fill: none; stroke-dasharray: 4.44,1.92; stroke-dashoffset: 0; stroke: #467b91; stroke-width: 1.2"/>
+   </g>
+   <g id="line2d_25">
+    <path d="M 304.635123 26.47184 
+L 307.063729 26.849173 
+L 309.492335 27.408575 
+L 311.920941 28.104741 
+L 314.349547 28.929424 
+L 316.778153 29.832911 
+L 319.206759 30.816784 
+L 321.635365 31.89618 
+L 324.063972 33.072135 
+L 326.492578 34.3169 
+L 328.921184 35.618563 
+L 331.34979 36.986633 
+L 333.778396 38.395926 
+L 336.207002 39.865309 
+L 338.635608 41.376376 
+L 341.064214 42.952392 
+L 343.49282 44.510615 
+L 345.921427 46.104066 
+L 348.350033 47.694371 
+L 350.778639 49.294667 
+L 353.207245 50.907555 
+L 355.635851 52.495882 
+L 358.064457 54.070871 
+L 360.493063 55.611284 
+L 362.921669 57.14409 
+L 365.350276 58.631612 
+L 367.778882 60.080637 
+L 370.207488 61.523894 
+L 372.636094 62.993403 
+L 375.0647 64.470654 
+L 377.493306 65.940436 
+L 379.921912 67.395351 
+L 382.350518 68.855715 
+L 384.779124 70.23401 
+L 387.207731 71.568607 
+L 389.636337 72.933838 
+L 392.064943 74.303129 
+L 394.493549 75.631981 
+L 396.922155 76.940133 
+L 399.350761 78.26027 
+L 401.779367 79.599936 
+L 404.207973 80.908866 
+L 406.63658 82.196804 
+L 409.065186 83.50787 
+L 411.493792 84.818598 
+L 413.922398 86.139596 
+L 416.351004 87.47402 
+L 418.77961 88.772863 
+L 421.208216 90.050132 
+L 423.636822 91.317243 
+L 426.065428 92.520747 
+L 428.494035 93.673444 
+L 430.922641 94.751981 
+L 433.351247 95.755116 
+L 435.779853 96.740997 
+L 438.208459 97.664557 
+L 440.637065 98.515211 
+L 443.065671 99.325698 
+L 445.494277 100.116806 
+L 447.922883 100.824872 
+L 450.35149 101.494619 
+L 452.780096 102.141547 
+L 455.208702 102.75782 
+L 457.637308 103.290548 
+L 460.065914 103.684269 
+L 462.49452 104.042138 
+L 464.923126 104.317771 
+L 467.351732 104.576054 
+L 469.780339 104.853066 
+L 472.208945 105.079146 
+L 474.637551 105.305449 
+L 477.066157 105.48934 
+L 479.494763 105.583834 
+L 481.923369 105.713074 
+L 484.351975 105.840132 
+L 486.780581 105.930154 
+L 489.209187 106.009824 
+L 491.637794 106.071921 
+L 494.0664 106.080049 
+L 496.495006 106.101117 
+" clip-path="url(#pe04d79ae6e)" style="fill: none; stroke-dasharray: 1.2,1.98; stroke-dashoffset: 0; stroke: #8a7750; stroke-width: 1.2"/>
+   </g>
+   <g id="line2d_26">
+    <path d="M 304.635123 26.572987 
+L 307.063729 27.167315 
+L 309.492335 28.00507 
+L 311.920941 29.055222 
+L 314.349547 30.301279 
+L 316.778153 31.707279 
+L 319.206759 33.259973 
+L 321.635365 34.92006 
+L 324.063972 36.674953 
+L 326.492578 38.507036 
+L 328.921184 40.382772 
+L 331.34979 42.289676 
+L 333.778396 44.256452 
+L 336.207002 46.254765 
+L 338.635608 48.261965 
+L 341.064214 50.304799 
+L 343.49282 52.355024 
+L 345.921427 54.40488 
+L 348.350033 56.453305 
+L 350.778639 58.439301 
+L 353.207245 60.29423 
+L 355.635851 61.991984 
+L 358.064457 63.695222 
+L 360.493063 65.400351 
+L 362.921669 67.12745 
+L 365.350276 68.85583 
+L 367.778882 70.541825 
+L 370.207488 72.248143 
+L 372.636094 73.987164 
+L 375.0647 75.752655 
+L 377.493306 77.510089 
+L 379.921912 79.275131 
+L 382.350518 81.055146 
+L 384.779124 82.837586 
+L 387.207731 84.61031 
+L 389.636337 86.352021 
+L 392.064943 88.05314 
+L 394.493549 89.708866 
+L 396.922155 91.330653 
+L 399.350761 92.898792 
+L 401.779367 94.467071 
+L 404.207973 96.017455 
+L 406.63658 97.497274 
+L 409.065186 98.841591 
+L 411.493792 100.031142 
+L 413.922398 101.166567 
+L 416.351004 102.19323 
+L 418.77961 103.102634 
+L 421.208216 103.893391 
+L 423.636822 104.529475 
+L 426.065428 105.096644 
+L 428.494035 105.485417 
+L 430.922641 105.81301 
+L 433.351247 106.062437 
+L 435.779853 106.236194 
+L 438.208459 106.438119 
+L 440.637065 106.650728 
+L 443.065671 106.876238 
+L 445.494277 107.045005 
+L 447.922883 107.087237 
+L 450.35149 107.115874 
+L 452.780096 107.148771 
+L 455.208702 107.239042 
+L 457.637308 107.294914 
+L 460.065914 107.288393 
+L 462.49452 107.288617 
+L 464.923126 107.311613 
+L 467.351732 107.331582 
+L 469.780339 107.338228 
+L 472.208945 107.393358 
+L 474.637551 107.464741 
+L 477.066157 107.495254 
+L 479.494763 107.480108 
+L 481.923369 107.425398 
+L 484.351975 107.402694 
+L 486.780581 107.421071 
+L 489.209187 107.460505 
+L 491.637794 107.455498 
+L 494.0664 107.444354 
+L 496.495006 107.432604 
+" clip-path="url(#pe04d79ae6e)" style="fill: none; stroke-dasharray: 7.68,1.92,1.2,1.92; stroke-dashoffset: 0; stroke: #72715e; stroke-width: 1.2"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 295.042128 112.464 
+L 295.042128 22.176 
+" style="fill: none; stroke: #aaaaaa; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 295.042128 112.464 
+L 506.088 112.464 
+" style="fill: none; stroke: #aaaaaa; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_19">
+    <text style="font-style: italic; font-size: 11px; font-family: 'DejaVu Serif', 'Bitstream Vera Serif', 'Computer Modern Roman', 'New Century Schoolbook', 'Century Schoolbook L', 'Utopia', 'ITC Bookman', 'Bookman', 'Nimbus Roman No9 L', 'Times New Roman', 'Times', 'Palatino', 'Charter', serif; text-anchor: start" x="295.042128" y="16.176" transform="rotate(-0 295.042128 16.176)">rooms</text>
+   </g>
+  </g>
+  <g id="legend_1">
+   <g id="line2d_27">
+    <path d="M 51.383125 148.854125 
+L 59.383125 148.854125 
+L 67.383125 148.854125 
+" style="fill: none; stroke: #8a1a1a; stroke-width: 1.9; stroke-linecap: square"/>
+   </g>
+   <g id="text_20">
+    <text style="font-size: 8px; font-family: 'DejaVu Serif', 'Bitstream Vera Serif', 'Computer Modern Roman', 'New Century Schoolbook', 'Century Schoolbook L', 'Utopia', 'ITC Bookman', 'Bookman', 'Nimbus Roman No9 L', 'Times New Roman', 'Times', 'Palatino', 'Charter', serif; text-anchor: start" x="73.783125" y="151.654125" transform="rotate(-0 73.783125 151.654125)">Persistent RTGA</text>
+   </g>
+   <g id="line2d_28">
+    <path d="M 156.383125 148.854125 
+L 164.383125 148.854125 
+L 172.383125 148.854125 
+" style="fill: none; stroke-dasharray: 4.44,1.92; stroke-dashoffset: 0; stroke: #467b91; stroke-width: 1.2"/>
+   </g>
+   <g id="text_21">
+    <text style="font-size: 8px; font-family: 'DejaVu Serif', 'Bitstream Vera Serif', 'Computer Modern Roman', 'New Century Schoolbook', 'Century Schoolbook L', 'Utopia', 'ITC Bookman', 'Bookman', 'Nimbus Roman No9 L', 'Times New Roman', 'Times', 'Palatino', 'Charter', serif; text-anchor: start" x="178.783125" y="151.654125" transform="rotate(-0 178.783125 151.654125)">Fresh evolution</text>
+   </g>
+   <g id="line2d_29">
+    <path d="M 258.218125 148.854125 
+L 266.218125 148.854125 
+L 274.218125 148.854125 
+" style="fill: none; stroke-dasharray: 1.2,1.98; stroke-dashoffset: 0; stroke: #8a7750; stroke-width: 1.2"/>
+   </g>
+   <g id="text_22">
+    <text style="font-size: 8px; font-family: 'DejaVu Serif', 'Bitstream Vera Serif', 'Computer Modern Roman', 'New Century Schoolbook', 'Century Schoolbook L', 'Utopia', 'ITC Bookman', 'Bookman', 'Nimbus Roman No9 L', 'Times New Roman', 'Times', 'Palatino', 'Charter', serif; text-anchor: start" x="280.618125" y="151.654125" transform="rotate(-0 280.618125 151.654125)">Random shooting</text>
+   </g>
+   <g id="line2d_30">
+    <path d="M 367.751875 148.854125 
+L 375.751875 148.854125 
+L 383.751875 148.854125 
+" style="fill: none; stroke-dasharray: 7.68,1.92,1.2,1.92; stroke-dashoffset: 0; stroke: #72715e; stroke-width: 1.2"/>
+   </g>
+   <g id="text_23">
+    <text style="font-size: 8px; font-family: 'DejaVu Serif', 'Bitstream Vera Serif', 'Computer Modern Roman', 'New Century Schoolbook', 'Century Schoolbook L', 'Utopia', 'ITC Bookman', 'Bookman', 'Nimbus Roman No9 L', 'Times New Roman', 'Times', 'Palatino', 'Charter', serif; text-anchor: start" x="390.151875" y="151.654125" transform="rotate(-0 390.151875 151.654125)">Categorical CEM</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p9f1b482145">
+   <rect x="46.008" y="22.176" width="211.045872" height="90.288"/>
+  </clipPath>
+  <clipPath id="pe04d79ae6e">
+   <rect x="295.042128" y="22.176" width="211.045872" height="90.288"/>
+  </clipPath>
+ </defs>
+</svg>
+<figcaption>Figure 1. Distance after each executed action, averaged equally across recorded seeds. Lines are descriptive means; paired intervals are on the next page.</figcaption></figure>
+<h2>Recorded outcomes and planning cost</h2><table><thead><tr><th>Variant / method</th><th>Success</th><th>First hit†</th><th>Mean dist.</th><th>Final dist.</th><th>Latency p50 / p95, ms</th></tr></thead><tbody><tr><td>open / Persistent RTGA</td><td>30/30</td><td>42.5</td><td>0.226</td><td>0.001</td><td>3.50 / 3.91</td></tr><tr><td>open / Fresh evolution</td><td>30/30</td><td>49.5</td><td>0.270</td><td>0.006</td><td>3.51 / 3.97</td></tr><tr><td>open / Random shooting</td><td>30/30</td><td>53.5</td><td>0.293</td><td>0.008</td><td>3.24 / 3.66</td></tr><tr><td>open / Categorical CEM</td><td>30/30</td><td>43.5</td><td>0.230</td><td>0.005</td><td>3.38 / 3.80</td></tr><tr><td>rooms / Persistent RTGA</td><td>26/30</td><td>45.0</td><td>0.268</td><td>0.052</td><td>8.39 / 8.91</td></tr><tr><td>rooms / Fresh evolution</td><td>28/30</td><td>51.5</td><td>0.296</td><td>0.031</td><td>8.39 / 8.90</td></tr><tr><td>rooms / Random shooting</td><td>26/30</td><td>58.5</td><td>0.332</td><td>0.055</td><td>8.13 / 8.65</td></tr><tr><td>rooms / Categorical CEM</td><td>27/30</td><td>45.0</td><td>0.265</td><td>0.044</td><td>8.26 / 8.77</td></tr></tbody></table><p>Persistence did not dominate the observed success counts: Fresh evolution reached more goals than persistence in rooms (28/30 versus 26/30); Categorical CEM reached more goals than persistence in rooms (27/30 versus 26/30). Improved distance control and reliable goal reachability are separate endpoints.</p>
+<p class="note">† First hit is the median among successful runs only. Mean/final distance include all runs. p50/p95 pool decision latencies within the row.</p>
+<div class="with-note"><p>Recorded per-decision model-transition counts: 6,144. The suite contains 117,964,800 hypothetical transitions. Latency percentiles pool recorded decisions within each method/variant, rather than averaging run percentiles. Statistical intervals use seeds, not decisions, as independent units.</p><aside>All methods execute one action per decision. Re-evaluating inherited plans is charged to the same model-transition budget.</aside></div></article>
+<article class="page"><header><div class="kicker">RTGA · experiment 001 · inference and reproduction</div></header>
+<h2>Paired differences: persistent minus comparator</h2><table><thead><tr><th>Variant / comparator</th><th>Δ success, pp</th><th>Δ restricted hit</th><th>Δ mean distance</th><th>Δ final distance</th></tr></thead><tbody><tr><td>open / Fresh evolution</td><td>+0.0<small>[+0.0, +0.0]</small></td><td>-7.4<small>[-8.5, -6.3]</small></td><td>-0.044<small>[-0.051, -0.038]</small></td><td>-0.005<small>[-0.007, -0.004]</small></td></tr><tr><td>open / Random shooting</td><td>+0.0<small>[+0.0, +0.0]</small></td><td>-11.1<small>[-12.3, -9.9]</small></td><td>-0.067<small>[-0.076, -0.059]</small></td><td>-0.007<small>[-0.008, -0.005]</small></td></tr><tr><td>open / Categorical CEM</td><td>+0.0<small>[+0.0, +0.0]</small></td><td>-0.5<small>[-0.8, -0.1]</small></td><td>-0.003<small>[-0.005, -0.002]</small></td><td>-0.004<small>[-0.005, -0.003]</small></td></tr><tr><td>rooms / Fresh evolution</td><td>-6.7<small>[-16.7, +0.0]</small></td><td>-5.2<small>[-7.7, -2.0]</small></td><td>-0.028<small>[-0.042, -0.010]</small></td><td>+0.021<small>[-0.005, +0.058]</small></td></tr><tr><td>rooms / Random shooting</td><td>+0.0<small>[-10.0, +10.0]</small></td><td>-10.9<small>[-13.3, -8.5]</small></td><td>-0.064<small>[-0.079, -0.049]</small></td><td>-0.003<small>[-0.035, +0.032]</small></td></tr><tr><td>rooms / Categorical CEM</td><td>-3.3<small>[-10.0, +0.0]</small></td><td>+0.3<small>[-0.7, +1.9]</small></td><td>+0.003<small>[-0.003, +0.013]</small></td><td>+0.008<small>[-0.005, +0.035]</small></td></tr></tbody></table>
+<div class="with-note"><p>Every effect is the mean paired difference, persistent minus comparator, within one variant. The 95% percentile intervals resample complete seed pairs 20,000 times (NumPy generator seed 20260905). Success effects are percentage points. Distance effects use world units. Restricted first-hit time is min(T, 80); failures contribute 80 actions. Negative distance/time differences favor persistence. Intervals are unadjusted across comparisons and endpoints; degenerate success intervals do not prove equal success probabilities.</p><aside>Read the endpoints separately. More successes favor persistence; smaller distance and first-hit time favor persistence.<br><br>Each displayed interval contains 95% of bootstrap estimates. No multiplicity correction.</aside></div>
+<h2>Methods</h2><p>The agent selects among six primitive actions, simulates 64 plans of 24 steps for 4 generations, executes the best first action, then replans. Fitness is negative discounted mean future distance (discount 0.99); success means observed distance ≤ 0.06 at least once. Open has no internal wall; rooms has a permanent open doorway. Initial positions and goals are matched by seed.</p><p>Persistent RTGA shifts all genomes and appends a random action. Fresh evolution uses the same genetic operators but initializes anew at each decision. Random shooting samples independent populations; categorical CEM refits per-position action probabilities with a 10% uniform floor and keeps the incumbent within each decision. CEM is initialized afresh between decisions, so this is not an iCEM comparison.</p>
+<div class="with-note"><section><h2>Limits of this result</h2><p>This is one simple environment family, one selected compute setting and known deterministic dynamics. The goal-directed distance objective provides dense guidance, and rooms does not require discovering a switch. Reaching the goal once is not the same as remaining there; mean and final distance expose that difference. The CEM baseline lacks cross-decision warm starts. Planning-time measurements exclude real environment steps, trace writing and training; they are not hard real-time guarantees. No learned-model or curiosity claim follows.</p></section><aside>Related work: <a href="https://rdgain.github.io/assets/pdf/papers/gaina2017rhhybrids.pdf">RHEA shift buffers (2017)</a> and <a href="https://proceedings.mlr.press/v155/pinneri21a.html">iCEM (2020)</a>. Categorical CEM here is an intentionally simple comparator.</aside></div>
+<h2>Provenance</h2><p class="provenance">Run commit <code>41bd35db6b875376d5f9a3557c4f4029c965042c</code> · clean working tree. The run began from a clean recorded commit. The result file also contains per-source SHA-256 hashes.<br>Results <a href="../results/001-oracle/results.json">../results/001-oracle/results.json</a><br>Result SHA-256 <code>a44d9f99c4c21dd7f53019823fe551014b2cd9b71cc4f9a45c21dc71ffa4fddc</code><br>Seeds 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129 · Python 3.12.11 · NumPy 2.5.2<br>macOS-26.6.2-arm64-arm-64bit<br>Recorded invocation:</p><pre>python -m rtga.cli oracle --output results/001-oracle --seeds 30 --seed-start 100 --steps 80 --population 64 --horizon 24 --generations 4</pre>
+<p class="note">The Markdown companion records the report-generation command. Numerical results are derived from one complete JSON snapshot; this paper does not select a favorable animation.</p></article></body></html>
