@@ -1,0 +1,2353 @@
+{
+  "experiment": "offline_event_learning",
+  "command": [
+    "/opt/homebrew/Cellar/python@3.12/3.12.11/Frameworks/Python.framework/Versions/3.12/Resources/Python.app/Contents/MacOS/Python",
+    "-m",
+    "rtga.event_learning_study",
+    "--output",
+    "results/006-event-learning",
+    "--dataset",
+    "results/003-event-recall/replay.npz"
+  ],
+  "protocol_sha256": "6cf3f74454494763212a825d93ebf3c948d3ae419e572f9f833a6b39ead0d0e5",
+  "dataset": "results/003-event-recall/replay.npz",
+  "dataset_sha256": "0a1d3cfc75c10485b3c718ae28ce4265079a22d125ca126daf9b20db9a91b7f2",
+  "source_sha256": {
+    "event_learning_study.py": "f5d96351db4bdb8eca2dc70f0bb844f9cecc6829ebd7a12201f2e6b53b7c7b94",
+    "envs.py": "9883f95d36f3929cb61ca83eb0372550f0a082d8365fec5818f38121c8455956",
+    "models.py": "dd329c391f93a317f185a895fb8369b0e39370c1b77e5ad7f67f5dbcfa6b298f",
+    "__init__.py": "aaf2010db85eef0acabcaf4dd3eeeeae037891e3b9a7d1c2b00dd900ac1b0c36",
+    "agent.py": "54d8870e9ad39010e44204be1503e9392ca3ac4b418bc1324af9e454b8babe80",
+    "planning.py": "201f301fa74b340f72ce97d542cede37d389cc0ab79a3adf89c71c64ce52b36a"
+  },
+  "scope": "Offline fitting on full unchanged data; not exploration evidence",
+  "model_config": {
+    "state_dim": 6,
+    "n_actions": 6,
+    "members": 3,
+    "hidden": 64,
+    "learning_rate": 0.002,
+    "seed": 0,
+    "binary_dims": [
+      4
+    ],
+    "observation_scale": [
+      1.0,
+      1.0,
+      0.5,
+      0.5,
+      1.0,
+      1.0
+    ],
+    "observation_low": [
+      0.0,
+      0.0,
+      -0.5,
+      -0.5,
+      0.0,
+      -1.0
+    ],
+    "observation_high": [
+      1.0,
+      1.0,
+      0.5,
+      0.5,
+      1.0,
+      1.0
+    ],
+    "min_logvar": -8.0,
+    "max_logvar": 1.0,
+    "binary_loss_weight": 10.0
+  },
+  "event": {
+    "index": 326,
+    "state": [
+      0.24425198137760162,
+      0.5049150586128235,
+      -0.05250541493296623,
+      0.12295891344547272,
+      0.0,
+      0.0
+    ],
+    "action": 5,
+    "next_state": [
+      0.24194175004959106,
+      0.5103252530097961,
+      -0.046204764395952225,
+      0.10820384323596954,
+      1.0,
+      0.0
+    ]
+  },
+  "model_seeds": [
+    0,
+    1,
+    2
+  ],
+  "optimizer_checkpoints": [
+    1000,
+    3000
+  ],
+  "records": [
+    {
+      "candidate": "uniform",
+      "seed": 0,
+      "optimizer_updates": 1000,
+      "new_fit_seconds": 0.7069907089462504,
+      "training": {
+        "loss": -2.988600015640259,
+        "steps": 1000,
+        "samples": 384000,
+        "version": 1000
+      },
+      "sample_draws_per_member": [
+        128000,
+        128000,
+        128000
+      ],
+      "opening_event_draws_per_member": [
+        52,
+        49,
+        39
+      ],
+      "event_probability_members": [
+        0.01888035424053669,
+        0.022095462307333946,
+        0.024510765448212624
+      ],
+      "event_probability_mean": 0.02182886004447937,
+      "grid_all": {
+        "count": 6084,
+        "positives": 414,
+        "negatives": 5670,
+        "recall_at_half": 0.0,
+        "false_positive_rate_at_half": 0.0,
+        "positive_mean_probability": 0.025504887104034424,
+        "negative_mean_probability": 0.02675204537808895,
+        "positive_brier": 0.9496821165084839,
+        "negative_brier": 0.000847638410050422
+      },
+      "grid_interact": {
+        "count": 1014,
+        "positives": 414,
+        "negatives": 600,
+        "recall_at_half": 0.0,
+        "false_positive_rate_at_half": 0.0,
+        "positive_mean_probability": 0.025504887104034424,
+        "negative_mean_probability": 0.02735050581395626,
+        "positive_brier": 0.9496821165084839,
+        "negative_brier": 0.0008994168019853532
+      },
+      "grid_inside_wrong_action": {
+        "count": 2070,
+        "positives": 0,
+        "negatives": 2070,
+        "recall_at_half": null,
+        "false_positive_rate_at_half": 0.0,
+        "positive_mean_probability": null,
+        "negative_mean_probability": 0.02559906244277954,
+        "positive_brier": null,
+        "negative_brier": 0.0007170133176259696
+      },
+      "grid_outside_interact": {
+        "count": 600,
+        "positives": 0,
+        "negatives": 600,
+        "recall_at_half": null,
+        "false_positive_rate_at_half": 0.0,
+        "positive_mean_probability": null,
+        "negative_mean_probability": 0.02735050581395626,
+        "positive_brier": null,
+        "negative_brier": 0.0008994168019853532
+      },
+      "grid_by_velocity": [
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.02488771080970764,
+          "negative_mean_probability": 0.026185907423496246,
+          "positive_brier": 0.9508776664733887,
+          "negative_brier": 0.000805976684205234
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.028190860524773598,
+          "negative_mean_probability": 0.029708784073591232,
+          "positive_brier": 0.9444556832313538,
+          "negative_brier": 0.001033005421049893
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.02188483253121376,
+          "negative_mean_probability": 0.02294803224503994,
+          "positive_brier": 0.9567356109619141,
+          "negative_brier": 0.0006214873283170164
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.02322245202958584,
+          "negative_mean_probability": 0.024777473881840706,
+          "positive_brier": 0.9541234374046326,
+          "negative_brier": 0.0007205788278952241
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.026650160551071167,
+          "negative_mean_probability": 0.027638468891382217,
+          "positive_brier": 0.9474489688873291,
+          "negative_brier": 0.0008992500370368361
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.02819330245256424,
+          "negative_mean_probability": 0.029253603890538216,
+          "positive_brier": 0.9444516897201538,
+          "negative_brier": 0.0010055317543447018
+        }
+      ],
+      "motion": {
+        "count": 144,
+        "position_mse": 4.682141922048254e-05,
+        "velocity_mse": 1.1452807970586708e-05,
+        "continuous_normalized_mse": 3.769343858524814e-05,
+        "door_brier": 0.018549152855286508
+      }
+    },
+    {
+      "candidate": "uniform",
+      "seed": 0,
+      "optimizer_updates": 3000,
+      "new_fit_seconds": 1.5576791249914095,
+      "training": {
+        "loss": -3.245140552520752,
+        "steps": 2000,
+        "samples": 768000,
+        "version": 3000
+      },
+      "sample_draws_per_member": [
+        384000,
+        384000,
+        384000
+      ],
+      "opening_event_draws_per_member": [
+        133,
+        142,
+        144
+      ],
+      "event_probability_members": [
+        0.021764099597930908,
+        0.044947076588869095,
+        0.024208679795265198
+      ],
+      "event_probability_mean": 0.03030661679804325,
+      "grid_all": {
+        "count": 6084,
+        "positives": 414,
+        "negatives": 5670,
+        "recall_at_half": 0.0,
+        "false_positive_rate_at_half": 0.0,
+        "positive_mean_probability": 0.021507563069462776,
+        "negative_mean_probability": 0.005438243038952351,
+        "positive_brier": 0.9576693177223206,
+        "negative_brier": 0.00012351675832178444
+      },
+      "grid_interact": {
+        "count": 1014,
+        "positives": 414,
+        "negatives": 600,
+        "recall_at_half": 0.0,
+        "false_positive_rate_at_half": 0.0,
+        "positive_mean_probability": 0.021507563069462776,
+        "negative_mean_probability": 0.023986821994185448,
+        "positive_brier": 0.9576693177223206,
+        "negative_brier": 0.0010096660116687417
+      },
+      "grid_inside_wrong_action": {
+        "count": 2070,
+        "positives": 0,
+        "negatives": 2070,
+        "recall_at_half": null,
+        "false_positive_rate_at_half": 0.0,
+        "positive_mean_probability": null,
+        "negative_mean_probability": 0.0029930321034044027,
+        "positive_brier": null,
+        "negative_brier": 1.383152721246006e-05
+      },
+      "grid_outside_interact": {
+        "count": 600,
+        "positives": 0,
+        "negatives": 600,
+        "recall_at_half": null,
+        "false_positive_rate_at_half": 0.0,
+        "positive_mean_probability": null,
+        "negative_mean_probability": 0.023986821994185448,
+        "positive_brier": null,
+        "negative_brier": 0.0010096660116687417
+      },
+      "grid_by_velocity": [
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.014731595292687416,
+          "negative_mean_probability": 0.0037344975862652063,
+          "positive_brier": 0.9707741141319275,
+          "negative_brier": 4.439392068888992e-05
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.02261732518672943,
+          "negative_mean_probability": 0.00579111697152257,
+          "positive_brier": 0.955322802066803,
+          "negative_brier": 0.00010304271563654765
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.009432937949895859,
+          "negative_mean_probability": 0.002365031046792865,
+          "positive_brier": 0.9812318086624146,
+          "negative_brier": 1.8394042854197323e-05
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.006127153057605028,
+          "negative_mean_probability": 0.0015789642930030823,
+          "positive_brier": 0.9877870082855225,
+          "negative_brier": 7.989893674675841e-06
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.0342518575489521,
+          "negative_mean_probability": 0.0085912449285388,
+          "positive_brier": 0.9327695369720459,
+          "negative_brier": 0.000228699209401384
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.041884519159793854,
+          "negative_mean_probability": 0.01056860201060772,
+          "positive_brier": 0.9181306958198547,
+          "negative_brier": 0.00033858080860227346
+        }
+      ],
+      "motion": {
+        "count": 144,
+        "position_mse": 1.954127485286117e-06,
+        "velocity_mse": 3.448332699848379e-06,
+        "continuous_normalized_mse": 7.196544095769711e-06,
+        "door_brier": 0.011979581584872018
+      }
+    },
+    {
+      "candidate": "uniform",
+      "seed": 1,
+      "optimizer_updates": 1000,
+      "new_fit_seconds": 0.6783904999028891,
+      "training": {
+        "loss": -2.9880995750427246,
+        "steps": 1000,
+        "samples": 384000,
+        "version": 1000
+      },
+      "sample_draws_per_member": [
+        128000,
+        128000,
+        128000
+      ],
+      "opening_event_draws_per_member": [
+        52,
+        62,
+        47
+      ],
+      "event_probability_members": [
+        0.02712109684944153,
+        0.02852325513958931,
+        0.01362589094787836
+      ],
+      "event_probability_mean": 0.02309008128941059,
+      "grid_all": {
+        "count": 6084,
+        "positives": 414,
+        "negatives": 5670,
+        "recall_at_half": 0.0,
+        "false_positive_rate_at_half": 0.0,
+        "positive_mean_probability": 0.02818434312939644,
+        "negative_mean_probability": 0.03008231334388256,
+        "positive_brier": 0.9444767832756042,
+        "negative_brier": 0.0010743109742179513
+      },
+      "grid_interact": {
+        "count": 1014,
+        "positives": 414,
+        "negatives": 600,
+        "recall_at_half": 0.0,
+        "false_positive_rate_at_half": 0.0,
+        "positive_mean_probability": 0.02818434312939644,
+        "negative_mean_probability": 0.030435286462306976,
+        "positive_brier": 0.9444767832756042,
+        "negative_brier": 0.0011262138141319156
+      },
+      "grid_inside_wrong_action": {
+        "count": 2070,
+        "positives": 0,
+        "negatives": 2070,
+        "recall_at_half": null,
+        "false_positive_rate_at_half": 0.0,
+        "positive_mean_probability": null,
+        "negative_mean_probability": 0.028698721900582314,
+        "positive_brier": null,
+        "negative_brier": 0.0008949650218710303
+      },
+      "grid_outside_interact": {
+        "count": 600,
+        "positives": 0,
+        "negatives": 600,
+        "recall_at_half": null,
+        "false_positive_rate_at_half": 0.0,
+        "positive_mean_probability": null,
+        "negative_mean_probability": 0.030435286462306976,
+        "positive_brier": null,
+        "negative_brier": 0.0011262138141319156
+      },
+      "grid_by_velocity": [
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.027702294290065765,
+          "negative_mean_probability": 0.029656512662768364,
+          "positive_brier": 0.9454094767570496,
+          "negative_brier": 0.0010418773163110018
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.030412742868065834,
+          "negative_mean_probability": 0.03257007524371147,
+          "positive_brier": 0.940155565738678,
+          "negative_brier": 0.001253495691344142
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.025269104167819023,
+          "negative_mean_probability": 0.027052171528339386,
+          "positive_brier": 0.9501392245292664,
+          "negative_brier": 0.0008692712290212512
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.026838991791009903,
+          "negative_mean_probability": 0.028968453407287598,
+          "positive_brier": 0.9470882415771484,
+          "negative_brier": 0.000998719478957355
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.0288371779024601,
+          "negative_mean_probability": 0.03048400953412056,
+          "positive_brier": 0.9432051181793213,
+          "negative_brier": 0.0010950664291158319
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.030045751482248306,
+          "negative_mean_probability": 0.031762659549713135,
+          "positive_brier": 0.9408632516860962,
+          "negative_brier": 0.0011874358169734478
+        }
+      ],
+      "motion": {
+        "count": 144,
+        "position_mse": 1.5054418157526848e-05,
+        "velocity_mse": 3.3144715630921924e-06,
+        "continuous_normalized_mse": 3.6684714510404425e-05,
+        "door_brier": 0.023939100187449085
+      }
+    },
+    {
+      "candidate": "uniform",
+      "seed": 1,
+      "optimizer_updates": 3000,
+      "new_fit_seconds": 1.3265065419254825,
+      "training": {
+        "loss": -3.2472622394561768,
+        "steps": 2000,
+        "samples": 768000,
+        "version": 3000
+      },
+      "sample_draws_per_member": [
+        384000,
+        384000,
+        384000
+      ],
+      "opening_event_draws_per_member": [
+        147,
+        176,
+        139
+      ],
+      "event_probability_members": [
+        0.016986655071377754,
+        0.0239910539239645,
+        0.026670530438423157
+      ],
+      "event_probability_mean": 0.02254941314458847,
+      "grid_all": {
+        "count": 6084,
+        "positives": 414,
+        "negatives": 5670,
+        "recall_at_half": 0.0,
+        "false_positive_rate_at_half": 0.0,
+        "positive_mean_probability": 0.016426624730229378,
+        "negative_mean_probability": 0.004529047757387161,
+        "positive_brier": 0.967562198638916,
+        "negative_brier": 8.431758760707453e-05
+      },
+      "grid_interact": {
+        "count": 1014,
+        "positives": 414,
+        "negatives": 600,
+        "recall_at_half": 0.0,
+        "false_positive_rate_at_half": 0.0,
+        "positive_mean_probability": 0.016426624730229378,
+        "negative_mean_probability": 0.018828824162483215,
+        "positive_brier": 0.967562198638916,
+        "negative_brier": 0.0006673797615803778
+      },
+      "grid_inside_wrong_action": {
+        "count": 2070,
+        "positives": 0,
+        "negatives": 2070,
+        "recall_at_half": null,
+        "false_positive_rate_at_half": 0.0,
+        "positive_mean_probability": null,
+        "negative_mean_probability": 0.002571411430835724,
+        "positive_brier": null,
+        "negative_brier": 1.0656521226337645e-05
+      },
+      "grid_outside_interact": {
+        "count": 600,
+        "positives": 0,
+        "negatives": 600,
+        "recall_at_half": null,
+        "false_positive_rate_at_half": 0.0,
+        "positive_mean_probability": null,
+        "negative_mean_probability": 0.018828824162483215,
+        "positive_brier": null,
+        "negative_brier": 0.0006673797615803778
+      },
+      "grid_by_velocity": [
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.010962297208607197,
+          "negative_mean_probability": 0.003016156144440174,
+          "positive_brier": 0.9782097935676575,
+          "negative_brier": 2.8407483114278875e-05
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.01692894846200943,
+          "negative_mean_probability": 0.004655767697840929,
+          "positive_brier": 0.966461718082428,
+          "negative_brier": 6.655905599473044e-05
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.007066404912620783,
+          "negative_mean_probability": 0.0019473533611744642,
+          "positive_brier": 0.9859233498573303,
+          "negative_brier": 1.1983263902948238e-05
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.004325017333030701,
+          "negative_mean_probability": 0.0011960340198129416,
+          "positive_brier": 0.9913710355758667,
+          "negative_brier": 4.645683020498836e-06
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.026619017124176025,
+          "negative_mean_probability": 0.00733942212536931,
+          "positive_brier": 0.9475457072257996,
+          "negative_brier": 0.00015843752771615982
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.032658059149980545,
+          "negative_mean_probability": 0.009019552730023861,
+          "positive_brier": 0.935861349105835,
+          "negative_brier": 0.0002358725614612922
+        }
+      ],
+      "motion": {
+        "count": 144,
+        "position_mse": 1.941402266310336e-06,
+        "velocity_mse": 2.8188575117427246e-06,
+        "continuous_normalized_mse": 7.5787397964246844e-06,
+        "door_brier": 0.01333533191300109
+      }
+    },
+    {
+      "candidate": "uniform",
+      "seed": 2,
+      "optimizer_updates": 1000,
+      "new_fit_seconds": 0.6551604591077194,
+      "training": {
+        "loss": -2.9778029918670654,
+        "steps": 1000,
+        "samples": 384000,
+        "version": 1000
+      },
+      "sample_draws_per_member": [
+        128000,
+        128000,
+        128000
+      ],
+      "opening_event_draws_per_member": [
+        51,
+        65,
+        51
+      ],
+      "event_probability_members": [
+        0.026572760194540024,
+        0.033962100744247437,
+        0.03627786785364151
+      ],
+      "event_probability_mean": 0.03227090835571289,
+      "grid_all": {
+        "count": 6084,
+        "positives": 414,
+        "negatives": 5670,
+        "recall_at_half": 0.0,
+        "false_positive_rate_at_half": 0.0,
+        "positive_mean_probability": 0.036875102669000626,
+        "negative_mean_probability": 0.03467550501227379,
+        "positive_brier": 0.9276742935180664,
+        "negative_brier": 0.0013453168794512749
+      },
+      "grid_interact": {
+        "count": 1014,
+        "positives": 414,
+        "negatives": 600,
+        "recall_at_half": 0.0,
+        "false_positive_rate_at_half": 0.0,
+        "positive_mean_probability": 0.036875102669000626,
+        "negative_mean_probability": 0.03878450393676758,
+        "positive_brier": 0.9276742935180664,
+        "negative_brier": 0.001728765550069511
+      },
+      "grid_inside_wrong_action": {
+        "count": 2070,
+        "positives": 0,
+        "negatives": 2070,
+        "recall_at_half": null,
+        "false_positive_rate_at_half": 0.0,
+        "positive_mean_probability": null,
+        "negative_mean_probability": 0.03316221386194229,
+        "positive_brier": null,
+        "negative_brier": 0.0011535994708538055
+      },
+      "grid_outside_interact": {
+        "count": 600,
+        "positives": 0,
+        "negatives": 600,
+        "recall_at_half": null,
+        "false_positive_rate_at_half": 0.0,
+        "positive_mean_probability": null,
+        "negative_mean_probability": 0.03878450393676758,
+        "positive_brier": null,
+        "negative_brier": 0.001728765550069511
+      },
+      "grid_by_velocity": [
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.036142487078905106,
+          "negative_mean_probability": 0.034057874232530594,
+          "positive_brier": 0.9290740489959717,
+          "negative_brier": 0.0012912594247609377
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.04103580117225647,
+          "negative_mean_probability": 0.03793438524007797,
+          "positive_brier": 0.9196784496307373,
+          "negative_brier": 0.0015995383728295565
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.03179053217172623,
+          "negative_mean_probability": 0.030563879758119583,
+          "positive_brier": 0.9374713897705078,
+          "negative_brier": 0.0010414615971967578
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.03449125215411186,
+          "negative_mean_probability": 0.03248593211174011,
+          "positive_brier": 0.9322561621665955,
+          "negative_brier": 0.0011773636797443032
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.037775155156850815,
+          "negative_mean_probability": 0.035610638558864594,
+          "positive_brier": 0.9259328842163086,
+          "negative_brier": 0.0014090909389778972
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.040015388280153275,
+          "negative_mean_probability": 0.03740031644701958,
+          "positive_brier": 0.9216328859329224,
+          "negative_brier": 0.001553187146782875
+        }
+      ],
+      "motion": {
+        "count": 144,
+        "position_mse": 2.1407178463095213e-05,
+        "velocity_mse": 1.8676524885792062e-05,
+        "continuous_normalized_mse": 6.849962935751141e-05,
+        "door_brier": 0.018338910873028955
+      }
+    },
+    {
+      "candidate": "uniform",
+      "seed": 2,
+      "optimizer_updates": 3000,
+      "new_fit_seconds": 1.3773762499913573,
+      "training": {
+        "loss": -3.2420949935913086,
+        "steps": 2000,
+        "samples": 768000,
+        "version": 3000
+      },
+      "sample_draws_per_member": [
+        384000,
+        384000,
+        384000
+      ],
+      "opening_event_draws_per_member": [
+        146,
+        153,
+        167
+      ],
+      "event_probability_members": [
+        0.025288069620728493,
+        0.023211710155010223,
+        0.03624686598777771
+      ],
+      "event_probability_mean": 0.028248881921172142,
+      "grid_all": {
+        "count": 6084,
+        "positives": 414,
+        "negatives": 5670,
+        "recall_at_half": 0.0,
+        "false_positive_rate_at_half": 0.0,
+        "positive_mean_probability": 0.020671237260103226,
+        "negative_mean_probability": 0.005389034282416105,
+        "positive_brier": 0.95926433801651,
+        "negative_brier": 0.000108903601358179
+      },
+      "grid_interact": {
+        "count": 1014,
+        "positives": 414,
+        "negatives": 600,
+        "recall_at_half": 0.0,
+        "false_positive_rate_at_half": 0.0,
+        "positive_mean_probability": 0.020671237260103226,
+        "negative_mean_probability": 0.022865988314151764,
+        "positive_brier": 0.95926433801651,
+        "negative_brier": 0.0008725209045223892
+      },
+      "grid_inside_wrong_action": {
+        "count": 2070,
+        "positives": 0,
+        "negatives": 2070,
+        "recall_at_half": null,
+        "false_positive_rate_at_half": 0.0,
+        "positive_mean_probability": null,
+        "negative_mean_probability": 0.0030892889481037855,
+        "positive_brier": null,
+        "negative_brier": 1.4102977729635313e-05
+      },
+      "grid_outside_interact": {
+        "count": 600,
+        "positives": 0,
+        "negatives": 600,
+        "recall_at_half": null,
+        "false_positive_rate_at_half": 0.0,
+        "positive_mean_probability": null,
+        "negative_mean_probability": 0.022865988314151764,
+        "positive_brier": null,
+        "negative_brier": 0.0008725209045223892
+      },
+      "grid_by_velocity": [
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.014813295565545559,
+          "negative_mean_probability": 0.003840262070298195,
+          "positive_brier": 0.9706122279167175,
+          "negative_brier": 4.39415052824188e-05
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.02183348499238491,
+          "negative_mean_probability": 0.005565328523516655,
+          "positive_brier": 0.9568499326705933,
+          "negative_brier": 9.282141400035471e-05
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.00996819045394659,
+          "negative_mean_probability": 0.002647259272634983,
+          "positive_brier": 0.9801720976829529,
+          "negative_brier": 2.0449748262763023e-05
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.006584194488823414,
+          "negative_mean_probability": 0.0016966635594144464,
+          "positive_brier": 0.9868791103363037,
+          "negative_brier": 8.912219527701382e-06
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.032148394733667374,
+          "negative_mean_probability": 0.00845540501177311,
+          "positive_brier": 0.9368197917938232,
+          "negative_brier": 0.00020080438116565347
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.03867986425757408,
+          "negative_mean_probability": 0.010129286907613277,
+          "positive_brier": 0.9242529273033142,
+          "negative_brier": 0.00028649234445765615
+        }
+      ],
+      "motion": {
+        "count": 144,
+        "position_mse": 3.6014686179053094e-06,
+        "velocity_mse": 2.257000070999501e-06,
+        "continuous_normalized_mse": 9.390445053692331e-06,
+        "door_brier": 0.010777707081030022
+      }
+    },
+    {
+      "candidate": "high_change",
+      "seed": 0,
+      "optimizer_updates": 1000,
+      "new_fit_seconds": 0.7049485420575365,
+      "training": {
+        "loss": -2.8195013999938965,
+        "steps": 1000,
+        "samples": 384000,
+        "version": 1000
+      },
+      "sample_draws_per_member": [
+        128000,
+        128000,
+        128000
+      ],
+      "opening_event_draws_per_member": [
+        2658,
+        2577,
+        2649
+      ],
+      "event_probability_members": [
+        0.7285287380218506,
+        0.7389699816703796,
+        0.7327085137367249
+      ],
+      "event_probability_mean": 0.7334024310112,
+      "grid_all": {
+        "count": 6084,
+        "positives": 414,
+        "negatives": 5670,
+        "recall_at_half": 0.47101449275362317,
+        "false_positive_rate_at_half": 0.0691358024691358,
+        "positive_mean_probability": 0.5125015377998352,
+        "negative_mean_probability": 0.13165906071662903,
+        "positive_brier": 0.28933417797088623,
+        "negative_brier": 0.05307525768876076
+      },
+      "grid_interact": {
+        "count": 1014,
+        "positives": 414,
+        "negatives": 600,
+        "recall_at_half": 0.47101449275362317,
+        "false_positive_rate_at_half": 0.5366666666666666,
+        "positive_mean_probability": 0.5125015377998352,
+        "negative_mean_probability": 0.511842668056488,
+        "positive_brier": 0.28933417797088623,
+        "negative_brier": 0.3182200491428375
+      },
+      "grid_inside_wrong_action": {
+        "count": 2070,
+        "positives": 0,
+        "negatives": 2070,
+        "recall_at_half": null,
+        "false_positive_rate_at_half": 0.004347826086956522,
+        "positive_mean_probability": null,
+        "negative_mean_probability": 0.08482370525598526,
+        "positive_brier": null,
+        "negative_brier": 0.020411059260368347
+      },
+      "grid_outside_interact": {
+        "count": 600,
+        "positives": 0,
+        "negatives": 600,
+        "recall_at_half": null,
+        "false_positive_rate_at_half": 0.5366666666666666,
+        "positive_mean_probability": null,
+        "negative_mean_probability": 0.511842668056488,
+        "positive_brier": null,
+        "negative_brier": 0.3182200491428375
+      },
+      "grid_by_velocity": [
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.2608695652173913,
+          "false_positive_rate_at_half": 0.04338624338624339,
+          "positive_mean_probability": 0.45266759395599365,
+          "negative_mean_probability": 0.09966393560171127,
+          "positive_brier": 0.3036690354347229,
+          "negative_brier": 0.030680617317557335
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.11594202898550725,
+          "false_positive_rate_at_half": 0.03492063492063492,
+          "positive_mean_probability": 0.41536837816238403,
+          "negative_mean_probability": 0.08627913892269135,
+          "positive_brier": 0.34586870670318604,
+          "negative_brier": 0.025250550359487534
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.4492753623188406,
+          "false_positive_rate_at_half": 0.050793650793650794,
+          "positive_mean_probability": 0.49085378646850586,
+          "negative_mean_probability": 0.11521121859550476,
+          "positive_brier": 0.2632150650024414,
+          "negative_brier": 0.03725104779005051
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.14842943847179413,
+          "negative_mean_probability": 0.03092116303741932,
+          "positive_brier": 0.7263050079345703,
+          "negative_brier": 0.003713894635438919
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 1.0,
+          "false_positive_rate_at_half": 0.14603174603174604,
+          "positive_mean_probability": 0.785030722618103,
+          "negative_mean_probability": 0.23206990957260132,
+          "positive_brier": 0.0479312501847744,
+          "negative_brier": 0.11236073821783066
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 1.0,
+          "false_positive_rate_at_half": 0.13968253968253969,
+          "positive_mean_probability": 0.7826593518257141,
+          "negative_mean_probability": 0.22580894827842712,
+          "positive_brier": 0.04901612922549248,
+          "negative_brier": 0.10919470340013504
+        }
+      ],
+      "motion": {
+        "count": 144,
+        "position_mse": 2.766336760008498e-05,
+        "velocity_mse": 0.00011937393041476232,
+        "continuous_normalized_mse": 0.0002040567378965233,
+        "door_brier": 0.08481629166258967
+      }
+    },
+    {
+      "candidate": "high_change",
+      "seed": 0,
+      "optimizer_updates": 3000,
+      "new_fit_seconds": 1.3676397500094026,
+      "training": {
+        "loss": -3.1794588565826416,
+        "steps": 2000,
+        "samples": 768000,
+        "version": 3000
+      },
+      "sample_draws_per_member": [
+        384000,
+        384000,
+        384000
+      ],
+      "opening_event_draws_per_member": [
+        7836,
+        7635,
+        7893
+      ],
+      "event_probability_members": [
+        0.8919077515602112,
+        0.9432260394096375,
+        0.9294514656066895
+      ],
+      "event_probability_mean": 0.9215283989906311,
+      "grid_all": {
+        "count": 6084,
+        "positives": 414,
+        "negatives": 5670,
+        "recall_at_half": 0.427536231884058,
+        "false_positive_rate_at_half": 0.044444444444444446,
+        "positive_mean_probability": 0.422085165977478,
+        "negative_mean_probability": 0.05811433494091034,
+        "positive_brier": 0.48636600375175476,
+        "negative_brier": 0.03590530902147293
+      },
+      "grid_interact": {
+        "count": 1014,
+        "positives": 414,
+        "negatives": 600,
+        "recall_at_half": 0.427536231884058,
+        "false_positive_rate_at_half": 0.42,
+        "positive_mean_probability": 0.422085165977478,
+        "negative_mean_probability": 0.42145970463752747,
+        "positive_brier": 0.48636600375175476,
+        "negative_brier": 0.32933661341667175
+      },
+      "grid_inside_wrong_action": {
+        "count": 2070,
+        "positives": 0,
+        "negatives": 2070,
+        "recall_at_half": null,
+        "false_positive_rate_at_half": 0.0,
+        "positive_mean_probability": null,
+        "negative_mean_probability": 0.013022943399846554,
+        "positive_brier": null,
+        "negative_brier": 0.0007161292596720159
+      },
+      "grid_outside_interact": {
+        "count": 600,
+        "positives": 0,
+        "negatives": 600,
+        "recall_at_half": null,
+        "false_positive_rate_at_half": 0.42,
+        "positive_mean_probability": null,
+        "negative_mean_probability": 0.42145970463752747,
+        "positive_brier": null,
+        "negative_brier": 0.32933661341667175
+      },
+      "grid_by_velocity": [
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.15499188005924225,
+          "negative_mean_probability": 0.02033502422273159,
+          "positive_brier": 0.7183306217193604,
+          "negative_brier": 0.005299328360706568
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.5652173913043478,
+          "false_positive_rate_at_half": 0.05502645502645503,
+          "positive_mean_probability": 0.5250887870788574,
+          "negative_mean_probability": 0.060150984674692154,
+          "positive_brier": 0.24016167223453522,
+          "negative_brier": 0.033841658383607864
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.028218064457178116,
+          "negative_mean_probability": 0.0043017067946493626,
+          "positive_brier": 0.9445719122886658,
+          "negative_brier": 0.00026040972443297505
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.0038463331293314695,
+          "negative_mean_probability": 0.0006229082937352359,
+          "positive_brier": 0.9923261404037476,
+          "negative_brier": 5.160648470337037e-06
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 1.0,
+          "false_positive_rate_at_half": 0.10582010582010581,
+          "positive_mean_probability": 0.8704965710639954,
+          "negative_mean_probability": 0.11365902423858643,
+          "positive_brier": 0.019767114892601967,
+          "negative_brier": 0.07799524813890457
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 1.0,
+          "false_positive_rate_at_half": 0.10582010582010581,
+          "positive_mean_probability": 0.9498692154884338,
+          "negative_mean_probability": 0.14961636066436768,
+          "positive_brier": 0.0030384832061827183,
+          "negative_brier": 0.09803006052970886
+        }
+      ],
+      "motion": {
+        "count": 144,
+        "position_mse": 7.181280435961421e-06,
+        "velocity_mse": 1.4915593959994538e-05,
+        "continuous_normalized_mse": 2.9620609414252403e-05,
+        "door_brier": 0.0849195650770071
+      }
+    },
+    {
+      "candidate": "high_change",
+      "seed": 1,
+      "optimizer_updates": 1000,
+      "new_fit_seconds": 0.8841234589926898,
+      "training": {
+        "loss": -2.8394014835357666,
+        "steps": 1000,
+        "samples": 384000,
+        "version": 1000
+      },
+      "sample_draws_per_member": [
+        128000,
+        128000,
+        128000
+      ],
+      "opening_event_draws_per_member": [
+        2553,
+        2573,
+        2616
+      ],
+      "event_probability_members": [
+        0.7014442086219788,
+        0.7159087657928467,
+        0.7380338907241821
+      ],
+      "event_probability_mean": 0.7184622883796692,
+      "grid_all": {
+        "count": 6084,
+        "positives": 414,
+        "negatives": 5670,
+        "recall_at_half": 0.5652173913043478,
+        "false_positive_rate_at_half": 0.06084656084656084,
+        "positive_mean_probability": 0.5373803973197937,
+        "negative_mean_probability": 0.12378844618797302,
+        "positive_brier": 0.2546970546245575,
+        "negative_brier": 0.047316599637269974
+      },
+      "grid_interact": {
+        "count": 1014,
+        "positives": 414,
+        "negatives": 600,
+        "recall_at_half": 0.5652173913043478,
+        "false_positive_rate_at_half": 0.575,
+        "positive_mean_probability": 0.5373803973197937,
+        "negative_mean_probability": 0.5360152125358582,
+        "positive_brier": 0.2546970546245575,
+        "negative_brier": 0.33349889516830444
+      },
+      "grid_inside_wrong_action": {
+        "count": 2070,
+        "positives": 0,
+        "negatives": 2070,
+        "recall_at_half": null,
+        "false_positive_rate_at_half": 0.0,
+        "positive_mean_probability": null,
+        "negative_mean_probability": 0.07265691459178925,
+        "positive_brier": null,
+        "negative_brier": 0.012204508297145367
+      },
+      "grid_outside_interact": {
+        "count": 600,
+        "positives": 0,
+        "negatives": 600,
+        "recall_at_half": null,
+        "false_positive_rate_at_half": 0.575,
+        "positive_mean_probability": null,
+        "negative_mean_probability": 0.5360152125358582,
+        "positive_brier": null,
+        "negative_brier": 0.33349889516830444
+      },
+      "grid_by_velocity": [
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.463768115942029,
+          "false_positive_rate_at_half": 0.05185185185185185,
+          "positive_mean_probability": 0.491585373878479,
+          "negative_mean_probability": 0.09690213948488235,
+          "positive_brier": 0.2626141309738159,
+          "negative_brier": 0.031467363238334656
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.2753623188405797,
+          "false_positive_rate_at_half": 0.042328042328042326,
+          "positive_mean_probability": 0.4513559639453888,
+          "negative_mean_probability": 0.08581602573394775,
+          "positive_brier": 0.30510714650154114,
+          "negative_brier": 0.026480721309781075
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.6521739130434783,
+          "false_positive_rate_at_half": 0.05925925925925926,
+          "positive_mean_probability": 0.5291121006011963,
+          "negative_mean_probability": 0.10869171470403671,
+          "positive_brier": 0.22575213015079498,
+          "negative_brier": 0.036734383553266525
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.2099931389093399,
+          "negative_mean_probability": 0.03648471087217331,
+          "positive_brier": 0.6260958313941956,
+          "negative_brier": 0.006253943778574467
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 1.0,
+          "false_positive_rate_at_half": 0.10582010582010581,
+          "positive_mean_probability": 0.7736957669258118,
+          "negative_mean_probability": 0.20974570512771606,
+          "positive_brier": 0.05309095233678818,
+          "negative_brier": 0.09260226786136627
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 1.0,
+          "false_positive_rate_at_half": 0.10582010582010581,
+          "positive_mean_probability": 0.7685398459434509,
+          "negative_mean_probability": 0.20509035885334015,
+          "positive_brier": 0.05552219599485397,
+          "negative_brier": 0.09036092460155487
+        }
+      ],
+      "motion": {
+        "count": 144,
+        "position_mse": 1.3297059856476123e-05,
+        "velocity_mse": 0.00010434177251684231,
+        "continuous_normalized_mse": 0.00018211053099169845,
+        "door_brier": 0.08620627875458776
+      }
+    },
+    {
+      "candidate": "high_change",
+      "seed": 1,
+      "optimizer_updates": 3000,
+      "new_fit_seconds": 1.5162990830140188,
+      "training": {
+        "loss": -3.172670841217041,
+        "steps": 2000,
+        "samples": 768000,
+        "version": 3000
+      },
+      "sample_draws_per_member": [
+        384000,
+        384000,
+        384000
+      ],
+      "opening_event_draws_per_member": [
+        7756,
+        7677,
+        7881
+      ],
+      "event_probability_members": [
+        0.8910350203514099,
+        0.9057650566101074,
+        0.8619934916496277
+      ],
+      "event_probability_mean": 0.8862645626068115,
+      "grid_all": {
+        "count": 6084,
+        "positives": 414,
+        "negatives": 5670,
+        "recall_at_half": 0.38164251207729466,
+        "false_positive_rate_at_half": 0.04285714285714286,
+        "positive_mean_probability": 0.3921169936656952,
+        "negative_mean_probability": 0.055817071348428726,
+        "positive_brier": 0.5125576257705688,
+        "negative_brier": 0.03252016007900238
+      },
+      "grid_interact": {
+        "count": 1014,
+        "positives": 414,
+        "negatives": 600,
+        "recall_at_half": 0.38164251207729466,
+        "false_positive_rate_at_half": 0.405,
+        "positive_mean_probability": 0.3921169936656952,
+        "negative_mean_probability": 0.3931000828742981,
+        "positive_brier": 0.5125576257705688,
+        "negative_brier": 0.29658782482147217
+      },
+      "grid_inside_wrong_action": {
+        "count": 2070,
+        "positives": 0,
+        "negatives": 2070,
+        "recall_at_half": null,
+        "false_positive_rate_at_half": 0.0,
+        "positive_mean_probability": null,
+        "negative_mean_probability": 0.013659962452948093,
+        "positive_brier": null,
+        "negative_brier": 0.0007701598224230111
+      },
+      "grid_outside_interact": {
+        "count": 600,
+        "positives": 0,
+        "negatives": 600,
+        "recall_at_half": null,
+        "false_positive_rate_at_half": 0.405,
+        "positive_mean_probability": null,
+        "negative_mean_probability": 0.3931000828742981,
+        "positive_brier": null,
+        "negative_brier": 0.29658782482147217
+      },
+      "grid_by_velocity": [
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.13211661577224731,
+          "negative_mean_probability": 0.01798948273062706,
+          "positive_brier": 0.756580650806427,
+          "negative_brier": 0.004131997004151344
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.2898550724637681,
+          "false_positive_rate_at_half": 0.0455026455026455,
+          "positive_mean_probability": 0.4165359437465668,
+          "negative_mean_probability": 0.052551429718732834,
+          "positive_brier": 0.35479259490966797,
+          "negative_brier": 0.024358192458748817
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.03429001569747925,
+          "negative_mean_probability": 0.0050973002798855305,
+          "positive_brier": 0.9328990578651428,
+          "negative_brier": 0.00037650344893336296
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.002433980815112591,
+          "negative_mean_probability": 0.0004366049834061414,
+          "positive_brier": 0.9951396584510803,
+          "negative_brier": 2.2518904643220594e-06
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 1.0,
+          "false_positive_rate_at_half": 0.10582010582010581,
+          "positive_mean_probability": 0.8408952355384827,
+          "negative_mean_probability": 0.11116112023591995,
+          "positive_brier": 0.029453765600919724,
+          "negative_brier": 0.07318516820669174
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 1.0,
+          "false_positive_rate_at_half": 0.10582010582010581,
+          "positive_mean_probability": 0.9264302849769592,
+          "negative_mean_probability": 0.14766651391983032,
+          "positive_brier": 0.006480079609900713,
+          "negative_brier": 0.09306685626506805
+        }
+      ],
+      "motion": {
+        "count": 144,
+        "position_mse": 5.886499785588886e-06,
+        "velocity_mse": 2.9631816625914837e-05,
+        "continuous_normalized_mse": 5.378029414087199e-05,
+        "door_brier": 0.08440562024902212
+      }
+    },
+    {
+      "candidate": "high_change",
+      "seed": 2,
+      "optimizer_updates": 1000,
+      "new_fit_seconds": 0.7423610829282552,
+      "training": {
+        "loss": -2.8115625381469727,
+        "steps": 1000,
+        "samples": 384000,
+        "version": 1000
+      },
+      "sample_draws_per_member": [
+        128000,
+        128000,
+        128000
+      ],
+      "opening_event_draws_per_member": [
+        2587,
+        2569,
+        2555
+      ],
+      "event_probability_members": [
+        0.7424880862236023,
+        0.6955592632293701,
+        0.7141613960266113
+      ],
+      "event_probability_mean": 0.7174029350280762,
+      "grid_all": {
+        "count": 6084,
+        "positives": 414,
+        "negatives": 5670,
+        "recall_at_half": 0.642512077294686,
+        "false_positive_rate_at_half": 0.06402116402116402,
+        "positive_mean_probability": 0.5560683608055115,
+        "negative_mean_probability": 0.12564176321029663,
+        "positive_brier": 0.22936686873435974,
+        "negative_brier": 0.04810553044080734
+      },
+      "grid_interact": {
+        "count": 1014,
+        "positives": 414,
+        "negatives": 600,
+        "recall_at_half": 0.642512077294686,
+        "false_positive_rate_at_half": 0.605,
+        "positive_mean_probability": 0.5560683608055115,
+        "negative_mean_probability": 0.5547577142715454,
+        "positive_brier": 0.22936686873435974,
+        "negative_brier": 0.3446063697338104
+      },
+      "grid_inside_wrong_action": {
+        "count": 2070,
+        "positives": 0,
+        "negatives": 2070,
+        "recall_at_half": null,
+        "false_positive_rate_at_half": 0.0,
+        "positive_mean_probability": null,
+        "negative_mean_probability": 0.07310116291046143,
+        "positive_brier": null,
+        "negative_brier": 0.012051139026880264
+      },
+      "grid_outside_interact": {
+        "count": 600,
+        "positives": 0,
+        "negatives": 600,
+        "recall_at_half": null,
+        "false_positive_rate_at_half": 0.605,
+        "positive_mean_probability": null,
+        "negative_mean_probability": 0.5547577142715454,
+        "positive_brier": null,
+        "negative_brier": 0.3446063697338104
+      },
+      "grid_by_velocity": [
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.6231884057971014,
+          "false_positive_rate_at_half": 0.05714285714285714,
+          "positive_mean_probability": 0.5199158787727356,
+          "negative_mean_probability": 0.10168823599815369,
+          "positive_brier": 0.2334667146205902,
+          "negative_brier": 0.034362293779850006
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.5072463768115942,
+          "false_positive_rate_at_half": 0.05291005291005291,
+          "positive_mean_probability": 0.49997004866600037,
+          "negative_mean_probability": 0.0942196473479271,
+          "positive_brier": 0.2530902028083801,
+          "negative_brier": 0.03139824792742729
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.7246376811594203,
+          "false_positive_rate_at_half": 0.06243386243386243,
+          "positive_mean_probability": 0.5372751355171204,
+          "negative_mean_probability": 0.1100756824016571,
+          "positive_brier": 0.21697597205638885,
+          "negative_brier": 0.037389419972896576
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.25535497069358826,
+          "negative_mean_probability": 0.04294653981924057,
+          "positive_brier": 0.5563836097717285,
+          "negative_brier": 0.008521073497831821
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 1.0,
+          "false_positive_rate_at_half": 0.10582010582010581,
+          "positive_mean_probability": 0.7617970705032349,
+          "negative_mean_probability": 0.20385245978832245,
+          "positive_brier": 0.05821067839860916,
+          "negative_brier": 0.08893844485282898
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 1.0,
+          "false_positive_rate_at_half": 0.10582010582010581,
+          "positive_mean_probability": 0.7620970606803894,
+          "negative_mean_probability": 0.2010679841041565,
+          "positive_brier": 0.05807418376207352,
+          "negative_brier": 0.08802371472120285
+        }
+      ],
+      "motion": {
+        "count": 144,
+        "position_mse": 1.2292735635262846e-05,
+        "velocity_mse": 0.00012627921051667834,
+        "continuous_normalized_mse": 0.00021869212406403556,
+        "door_brier": 0.07627045900519566
+      }
+    },
+    {
+      "candidate": "high_change",
+      "seed": 2,
+      "optimizer_updates": 3000,
+      "new_fit_seconds": 1.504417792079039,
+      "training": {
+        "loss": -3.1761484146118164,
+        "steps": 2000,
+        "samples": 768000,
+        "version": 3000
+      },
+      "sample_draws_per_member": [
+        384000,
+        384000,
+        384000
+      ],
+      "opening_event_draws_per_member": [
+        7592,
+        7781,
+        7834
+      ],
+      "event_probability_members": [
+        0.9132137298583984,
+        0.8857736587524414,
+        0.9210277795791626
+      ],
+      "event_probability_mean": 0.9066717028617859,
+      "grid_all": {
+        "count": 6084,
+        "positives": 414,
+        "negatives": 5670,
+        "recall_at_half": 0.37681159420289856,
+        "false_positive_rate_at_half": 0.04250440917107584,
+        "positive_mean_probability": 0.3940030634403229,
+        "negative_mean_probability": 0.05415542423725128,
+        "positive_brier": 0.5155022740364075,
+        "negative_brier": 0.033051881939172745
+      },
+      "grid_interact": {
+        "count": 1014,
+        "positives": 414,
+        "negatives": 600,
+        "recall_at_half": 0.37681159420289856,
+        "false_positive_rate_at_half": 0.40166666666666667,
+        "positive_mean_probability": 0.3940030634403229,
+        "negative_mean_probability": 0.3950730562210083,
+        "positive_brier": 0.5155022740364075,
+        "negative_brier": 0.303309828042984
+      },
+      "grid_inside_wrong_action": {
+        "count": 2070,
+        "positives": 0,
+        "negatives": 2070,
+        "recall_at_half": null,
+        "false_positive_rate_at_half": 0.0,
+        "positive_mean_probability": null,
+        "negative_mean_probability": 0.012140080332756042,
+        "positive_brier": null,
+        "negative_brier": 0.0006893076351843774
+      },
+      "grid_outside_interact": {
+        "count": 600,
+        "positives": 0,
+        "negatives": 600,
+        "recall_at_half": null,
+        "false_positive_rate_at_half": 0.40166666666666667,
+        "positive_mean_probability": null,
+        "negative_mean_probability": 0.3950730562210083,
+        "positive_brier": null,
+        "negative_brier": 0.303309828042984
+      },
+      "grid_by_velocity": [
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.1247812882065773,
+          "negative_mean_probability": 0.01612940989434719,
+          "positive_brier": 0.7685668468475342,
+          "negative_brier": 0.0033413118217140436
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.2608695652173913,
+          "false_positive_rate_at_half": 0.04338624338624339,
+          "positive_mean_probability": 0.4116857647895813,
+          "negative_mean_probability": 0.04762712121009827,
+          "positive_brier": 0.3574903607368469,
+          "negative_brier": 0.022711189463734627
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.02888193354010582,
+          "negative_mean_probability": 0.0041516502387821674,
+          "positive_brier": 0.9432635307312012,
+          "negative_brier": 0.0002453434281051159
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.0015337810618802905,
+          "negative_mean_probability": 0.00024085045151878148,
+          "positive_brier": 0.9969354271888733,
+          "negative_brier": 8.169269563040871e-07
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 1.0,
+          "false_positive_rate_at_half": 0.10582010582010581,
+          "positive_mean_probability": 0.8602088689804077,
+          "negative_mean_probability": 0.112396739423275,
+          "positive_brier": 0.02215730771422386,
+          "negative_brier": 0.07687174528837204
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 1.0,
+          "false_positive_rate_at_half": 0.10582010582010581,
+          "positive_mean_probability": 0.9369266033172607,
+          "negative_mean_probability": 0.14438676834106445,
+          "positive_brier": 0.004600021988153458,
+          "negative_brier": 0.09514087438583374
+        }
+      ],
+      "motion": {
+        "count": 144,
+        "position_mse": 1.0331082342449618e-05,
+        "velocity_mse": 2.534086353578376e-05,
+        "continuous_normalized_mse": 4.824633834843104e-05,
+        "door_brier": 0.06517687815790614
+      }
+    },
+    {
+      "candidate": "knn",
+      "seed": null,
+      "optimizer_updates": 0,
+      "event_probability_members": [
+        0.9997920989990234
+      ],
+      "event_probability_mean": 0.9997920989990234,
+      "grid_all": {
+        "count": 6084,
+        "positives": 414,
+        "negatives": 5670,
+        "recall_at_half": 0.09903381642512077,
+        "false_positive_rate_at_half": 0.0012345679012345679,
+        "positive_mean_probability": 0.13152280449867249,
+        "negative_mean_probability": 0.009336327202618122,
+        "positive_brier": 0.8066951632499695,
+        "negative_brier": 0.003085031872615218
+      },
+      "grid_interact": {
+        "count": 1014,
+        "positives": 414,
+        "negatives": 600,
+        "recall_at_half": 0.09903381642512077,
+        "false_positive_rate_at_half": 0.011666666666666667,
+        "positive_mean_probability": 0.13152280449867249,
+        "negative_mean_probability": 0.08822829276323318,
+        "positive_brier": 0.8066951632499695,
+        "negative_brier": 0.029153550043702126
+      },
+      "grid_inside_wrong_action": {
+        "count": 2070,
+        "positives": 0,
+        "negatives": 2070,
+        "recall_at_half": null,
+        "false_positive_rate_at_half": 0.0,
+        "positive_mean_probability": null,
+        "negative_mean_probability": 0.0,
+        "positive_brier": null,
+        "negative_brier": 0.0
+      },
+      "grid_outside_interact": {
+        "count": 600,
+        "positives": 0,
+        "negatives": 600,
+        "recall_at_half": null,
+        "false_positive_rate_at_half": 0.011666666666666667,
+        "positive_mean_probability": null,
+        "negative_mean_probability": 0.08822829276323318,
+        "positive_brier": null,
+        "negative_brier": 0.029153550043702126
+      },
+      "grid_by_velocity": [
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.0,
+          "negative_mean_probability": 0.0,
+          "positive_brier": 1.0,
+          "negative_brier": 0.0
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.0,
+          "negative_mean_probability": 0.0,
+          "positive_brier": 1.0,
+          "negative_brier": 0.0
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.0,
+          "negative_mean_probability": 0.0,
+          "positive_brier": 1.0,
+          "negative_brier": 0.0
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.0,
+          "negative_mean_probability": 0.0,
+          "positive_brier": 1.0,
+          "negative_brier": 0.0
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.0,
+          "false_positive_rate_at_half": 0.0,
+          "positive_mean_probability": 0.19812659919261932,
+          "negative_mean_probability": 0.01703914999961853,
+          "positive_brier": 0.6458372473716736,
+          "negative_brier": 0.0033767796121537685
+        },
+        {
+          "count": 1014,
+          "positives": 69,
+          "negatives": 945,
+          "recall_at_half": 0.5942028985507246,
+          "false_positive_rate_at_half": 0.007407407407407408,
+          "positive_mean_probability": 0.5910102128982544,
+          "negative_mean_probability": 0.03897881135344505,
+          "positive_brier": 0.19433395564556122,
+          "negative_brier": 0.015133409760892391
+        }
+      ],
+      "motion": {
+        "count": 144,
+        "position_mse": 4.679114795258785e-06,
+        "velocity_mse": 3.647381035878736e-05,
+        "continuous_normalized_mse": 6.022974249216329e-05,
+        "door_brier": 0.0075319676760756266
+      }
+    }
+  ],
+  "navigation": [
+    {
+      "candidate": "high_change",
+      "seed": 0,
+      "trajectory_file": "high_change-seed0-planner40000-default-navigation.json",
+      "planner_seed": 40000,
+      "start": "default",
+      "door_open_step": null,
+      "goal_reached_step": null,
+      "success": false,
+      "final_distance": 0.335000012891348,
+      "steps": 100,
+      "model_transitions": 1555200,
+      "wall_seconds": 1.2587232498917729
+    },
+    {
+      "candidate": "high_change",
+      "seed": 0,
+      "trajectory_file": "high_change-seed0-planner40000-experienced_event-navigation.json",
+      "planner_seed": 40000,
+      "start": "experienced_event",
+      "door_open_step": null,
+      "goal_reached_step": null,
+      "success": false,
+      "final_distance": 0.3357105949008417,
+      "steps": 100,
+      "model_transitions": 1555200,
+      "wall_seconds": 1.2420005419990048
+    },
+    {
+      "candidate": "high_change",
+      "seed": 0,
+      "trajectory_file": "high_change-seed0-planner40001-default-navigation.json",
+      "planner_seed": 40001,
+      "start": "default",
+      "door_open_step": null,
+      "goal_reached_step": null,
+      "success": false,
+      "final_distance": 0.3350033730665225,
+      "steps": 100,
+      "model_transitions": 1555200,
+      "wall_seconds": 1.2486961669055745
+    },
+    {
+      "candidate": "high_change",
+      "seed": 0,
+      "trajectory_file": "high_change-seed0-planner40001-experienced_event-navigation.json",
+      "planner_seed": 40001,
+      "start": "experienced_event",
+      "door_open_step": null,
+      "goal_reached_step": null,
+      "success": false,
+      "final_distance": 0.3350457709308917,
+      "steps": 100,
+      "model_transitions": 1555200,
+      "wall_seconds": 1.2153358749346808
+    },
+    {
+      "candidate": "high_change",
+      "seed": 0,
+      "trajectory_file": "high_change-seed0-planner40002-default-navigation.json",
+      "planner_seed": 40002,
+      "start": "default",
+      "door_open_step": null,
+      "goal_reached_step": null,
+      "success": false,
+      "final_distance": 0.3350000000169993,
+      "steps": 100,
+      "model_transitions": 1555200,
+      "wall_seconds": 1.2201584170106798
+    },
+    {
+      "candidate": "high_change",
+      "seed": 0,
+      "trajectory_file": "high_change-seed0-planner40002-experienced_event-navigation.json",
+      "planner_seed": 40002,
+      "start": "experienced_event",
+      "door_open_step": 1,
+      "goal_reached_step": 45,
+      "success": true,
+      "final_distance": 0.0036147646080290897,
+      "steps": 100,
+      "model_transitions": 1555200,
+      "wall_seconds": 1.2119107079925016
+    },
+    {
+      "candidate": "high_change",
+      "seed": 1,
+      "trajectory_file": "high_change-seed1-planner40000-default-navigation.json",
+      "planner_seed": 40000,
+      "start": "default",
+      "door_open_step": null,
+      "goal_reached_step": null,
+      "success": false,
+      "final_distance": 0.33871070101990564,
+      "steps": 100,
+      "model_transitions": 1555200,
+      "wall_seconds": 1.2178208749974146
+    },
+    {
+      "candidate": "high_change",
+      "seed": 1,
+      "trajectory_file": "high_change-seed1-planner40000-experienced_event-navigation.json",
+      "planner_seed": 40000,
+      "start": "experienced_event",
+      "door_open_step": null,
+      "goal_reached_step": null,
+      "success": false,
+      "final_distance": 0.3432928030922486,
+      "steps": 100,
+      "model_transitions": 1555200,
+      "wall_seconds": 1.2199826249852777
+    },
+    {
+      "candidate": "high_change",
+      "seed": 1,
+      "trajectory_file": "high_change-seed1-planner40001-default-navigation.json",
+      "planner_seed": 40001,
+      "start": "default",
+      "door_open_step": null,
+      "goal_reached_step": null,
+      "success": false,
+      "final_distance": 0.3387106834045545,
+      "steps": 100,
+      "model_transitions": 1555200,
+      "wall_seconds": 1.2138755000196397
+    },
+    {
+      "candidate": "high_change",
+      "seed": 1,
+      "trajectory_file": "high_change-seed1-planner40001-experienced_event-navigation.json",
+      "planner_seed": 40001,
+      "start": "experienced_event",
+      "door_open_step": null,
+      "goal_reached_step": null,
+      "success": false,
+      "final_distance": 0.343292730270986,
+      "steps": 100,
+      "model_transitions": 1555200,
+      "wall_seconds": 1.2235507080331445
+    },
+    {
+      "candidate": "high_change",
+      "seed": 1,
+      "trajectory_file": "high_change-seed1-planner40002-default-navigation.json",
+      "planner_seed": 40002,
+      "start": "default",
+      "door_open_step": null,
+      "goal_reached_step": null,
+      "success": false,
+      "final_distance": 0.33593151933476095,
+      "steps": 100,
+      "model_transitions": 1555200,
+      "wall_seconds": 1.212188750039786
+    },
+    {
+      "candidate": "high_change",
+      "seed": 1,
+      "trajectory_file": "high_change-seed1-planner40002-experienced_event-navigation.json",
+      "planner_seed": 40002,
+      "start": "experienced_event",
+      "door_open_step": null,
+      "goal_reached_step": null,
+      "success": false,
+      "final_distance": 0.33871076400953815,
+      "steps": 100,
+      "model_transitions": 1555200,
+      "wall_seconds": 1.2352610840462148
+    },
+    {
+      "candidate": "high_change",
+      "seed": 2,
+      "trajectory_file": "high_change-seed2-planner40000-default-navigation.json",
+      "planner_seed": 40000,
+      "start": "default",
+      "door_open_step": null,
+      "goal_reached_step": null,
+      "success": false,
+      "final_distance": 0.3432925667775381,
+      "steps": 100,
+      "model_transitions": 1555200,
+      "wall_seconds": 1.2145163749810308
+    },
+    {
+      "candidate": "high_change",
+      "seed": 2,
+      "trajectory_file": "high_change-seed2-planner40000-experienced_event-navigation.json",
+      "planner_seed": 40000,
+      "start": "experienced_event",
+      "door_open_step": null,
+      "goal_reached_step": null,
+      "success": false,
+      "final_distance": 0.3496063230001127,
+      "steps": 100,
+      "model_transitions": 1555200,
+      "wall_seconds": 1.2110722500365227
+    },
+    {
+      "candidate": "high_change",
+      "seed": 2,
+      "trajectory_file": "high_change-seed2-planner40001-default-navigation.json",
+      "planner_seed": 40001,
+      "start": "default",
+      "door_open_step": null,
+      "goal_reached_step": null,
+      "success": false,
+      "final_distance": 0.349606488152405,
+      "steps": 100,
+      "model_transitions": 1555200,
+      "wall_seconds": 1.2157447909703478
+    },
+    {
+      "candidate": "high_change",
+      "seed": 2,
+      "trajectory_file": "high_change-seed2-planner40001-experienced_event-navigation.json",
+      "planner_seed": 40001,
+      "start": "experienced_event",
+      "door_open_step": null,
+      "goal_reached_step": null,
+      "success": false,
+      "final_distance": 0.3432925343689186,
+      "steps": 100,
+      "model_transitions": 1555200,
+      "wall_seconds": 1.2246054171118885
+    },
+    {
+      "candidate": "high_change",
+      "seed": 2,
+      "trajectory_file": "high_change-seed2-planner40002-default-navigation.json",
+      "planner_seed": 40002,
+      "start": "default",
+      "door_open_step": null,
+      "goal_reached_step": null,
+      "success": false,
+      "final_distance": 0.34960648032538816,
+      "steps": 100,
+      "model_transitions": 1555200,
+      "wall_seconds": 1.2232012909371406
+    },
+    {
+      "candidate": "high_change",
+      "seed": 2,
+      "trajectory_file": "high_change-seed2-planner40002-experienced_event-navigation.json",
+      "planner_seed": 40002,
+      "start": "experienced_event",
+      "door_open_step": null,
+      "goal_reached_step": null,
+      "success": false,
+      "final_distance": 0.34960630625698635,
+      "steps": 100,
+      "model_transitions": 1555200,
+      "wall_seconds": 1.2173742919694632
+    },
+    {
+      "candidate": "knn",
+      "seed": null,
+      "trajectory_file": "knn-seedNone-planner40000-default-navigation.json",
+      "planner_seed": 40000,
+      "start": "default",
+      "door_open_step": null,
+      "goal_reached_step": null,
+      "success": false,
+      "final_distance": 0.3359315354221074,
+      "steps": 100,
+      "model_transitions": 172800,
+      "wall_seconds": 2.4563472089357674
+    },
+    {
+      "candidate": "knn",
+      "seed": null,
+      "trajectory_file": "knn-seedNone-planner40000-experienced_event-navigation.json",
+      "planner_seed": 40000,
+      "start": "experienced_event",
+      "door_open_step": null,
+      "goal_reached_step": null,
+      "success": false,
+      "final_distance": 0.3387107714529267,
+      "steps": 100,
+      "model_transitions": 172800,
+      "wall_seconds": 2.446798540884629
+    },
+    {
+      "candidate": "knn",
+      "seed": null,
+      "trajectory_file": "knn-seedNone-planner40001-default-navigation.json",
+      "planner_seed": 40001,
+      "start": "default",
+      "door_open_step": null,
+      "goal_reached_step": null,
+      "success": false,
+      "final_distance": 0.3350000000000001,
+      "steps": 100,
+      "model_transitions": 172800,
+      "wall_seconds": 2.4860895411111414
+    },
+    {
+      "candidate": "knn",
+      "seed": null,
+      "trajectory_file": "knn-seedNone-planner40001-experienced_event-navigation.json",
+      "planner_seed": 40001,
+      "start": "experienced_event",
+      "door_open_step": null,
+      "goal_reached_step": null,
+      "success": false,
+      "final_distance": 0.3387107714529267,
+      "steps": 100,
+      "model_transitions": 172800,
+      "wall_seconds": 2.5429876670241356
+    },
+    {
+      "candidate": "knn",
+      "seed": null,
+      "trajectory_file": "knn-seedNone-planner40002-default-navigation.json",
+      "planner_seed": 40002,
+      "start": "default",
+      "door_open_step": null,
+      "goal_reached_step": null,
+      "success": false,
+      "final_distance": 0.3350000000000001,
+      "steps": 100,
+      "model_transitions": 172800,
+      "wall_seconds": 2.5070668749976903
+    },
+    {
+      "candidate": "knn",
+      "seed": null,
+      "trajectory_file": "knn-seedNone-planner40002-experienced_event-navigation.json",
+      "planner_seed": 40002,
+      "start": "experienced_event",
+      "door_open_step": null,
+      "goal_reached_step": null,
+      "success": false,
+      "final_distance": 0.33593153748985416,
+      "steps": 100,
+      "model_transitions": 172800,
+      "wall_seconds": 2.5335486660478637
+    }
+  ],
+  "high_change_indices": [
+    326,
+    1740,
+    1650,
+    2453,
+    358,
+    1613,
+    2415,
+    193,
+    1987,
+    1167,
+    360,
+    1647,
+    2233,
+    2209,
+    1786,
+    872,
+    978,
+    1238,
+    1753,
+    1494,
+    1733,
+    305,
+    1920,
+    2263,
+    39
+  ],
+  "dataset_unchanged": true,
+  "protocol_unchanged": true,
+  "completed": true
+}

@@ -14,6 +14,7 @@ dependencies = ["numpy>=1.26", "torch>=2.4", "matplotlib>=3.8", "gymnasium>=1.0"
 
 [project.optional-dependencies]
 dev = ["pytest>=8", "build>=1"]
+mario = ["stable-retro==1.0.1"]
 
 [project.scripts]
 rtga = "rtga.cli:main"
@@ -26,4 +27,3 @@ include = ["rtga*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-

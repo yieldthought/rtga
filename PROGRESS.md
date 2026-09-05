@@ -25,6 +25,8 @@ The first system is running: batched puck simulation, persistent evolutionary se
 
 - [004 · Search budget and wall traps](papers/004-search-budget.md). Fixed development and confirmation comparisons: individual rescues do not increase held-out success; longer horizons trade away population width and cost more wall time.
 
+- [006 · Remembering is not generalizing](papers/006-event-learning.md). Reweighting generic large changes fits the recorded opening but produces false openings outside the switch. Nearest-neighbour memory also separates point recall from reusable knowledge.
+
 Each paper includes the question, method, complete results, limitations, and reproduction commands. Development results and confirmatory comparisons are labelled separately.
 
 ## Current observations, not yet confirmed across seeds
@@ -54,3 +56,5 @@ The observation/action agent can now save and restore its models, optimizer, rep
 ## Next fixed comparison
 
 Study 005 compares planned curiosity, reactive disagreement, and random actions on five new paired seeds in each of the mechanism and noise worlds. Each run receives 2,500 real transitions and the same fitting schedule; planning compute is counted separately. All resulting frozen models are tested on the same three new goals. No setting is selected from this suite’s outcomes.
+
+The optional Mario adapter is implemented and its metadata/mock checks pass. It accepts a supplied local compatible NES ROM, keeps integration files in ignored project storage, counts emulator frames, and exposes RGB observations without score or diagnostics. Actual emulator execution and visual world-model learning remain unverified. See [Mario setup](docs/MARIO.md).

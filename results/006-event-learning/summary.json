@@ -1,0 +1,44 @@
+{
+  "uniform": {
+    "event_p_mean": 0.027034970621267956,
+    "event_p_range": [
+      0.02254941314458847,
+      0.03030661679804325
+    ],
+    "opening_recall_mean": 0.0,
+    "outside_interact_false_positive_mean": 0.0,
+    "continuous_normalized_mse_mean": 8.055242981962243e-06,
+    "navigation_trials": 0,
+    "navigation_successes": 0,
+    "default_start_trials": 0,
+    "default_start_successes": 0
+  },
+  "high_change": {
+    "event_p_mean": 0.9048215548197428,
+    "event_p_range": [
+      0.8862645626068115,
+      0.9215283989906311
+    ],
+    "opening_recall_mean": 0.39533011272141705,
+    "outside_interact_false_positive_mean": 0.40888888888888886,
+    "continuous_normalized_mse_mean": 4.388241396785181e-05,
+    "navigation_trials": 18,
+    "navigation_successes": 1,
+    "default_start_trials": 9,
+    "default_start_successes": 0
+  },
+  "knn": {
+    "event_p_mean": 0.9997920989990234,
+    "event_p_range": [
+      0.9997920989990234,
+      0.9997920989990234
+    ],
+    "opening_recall_mean": 0.09903381642512077,
+    "outside_interact_false_positive_mean": 0.011666666666666667,
+    "continuous_normalized_mse_mean": 6.022974249216329e-05,
+    "navigation_trials": 6,
+    "navigation_successes": 0,
+    "default_start_trials": 3,
+    "default_start_successes": 0
+  }
+}

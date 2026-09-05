@@ -22,3 +22,7 @@ python3.12 -m venv .venv
 ```
 
 The output directory contains complete per-seed measurements and self-contained HTML viewers of the first seed's actual planning traces. This initial diagnostic supplies an exact simulator and a goal objective; it is not the curiosity-only experiment.
+
+## Observation/action integration
+
+`RTGAAgent` learns online from flat observations and can save/resume its full decision state. `ObservationActionAdapter` isolates Gymnasium rewards and diagnostics from the agent. The optional [Mario adapter](docs/MARIO.md) accepts an explicit local ROM and delivers RGB frames; a learned visual representation remains required before the vector agent can control it.
