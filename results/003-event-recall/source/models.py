@@ -56,10 +56,10 @@ class EnsembleConfig:
             if values is None:
                 continue
             values = tuple(float(value) for value in values)
-            if len(values) != self.state_dim or np.isnan(values).any():
-                raise ValueError(f"{name} must have state_dim values without NaNs")
-            if name == "observation_scale" and (not np.isfinite(values).all() or min(values) <= 0):
-                raise ValueError("observation_scale must be finite and strictly positive")
+            if len(values) != self.state_dim or not np.isfinite(values).all():
+                raise ValueError(f"{name} must have state_dim finite values")
+            if name == "observation_scale" and min(values) <= 0:
+                raise ValueError("observation_scale must be strictly positive")
             object.__setattr__(self, name, values)
         if self.observation_low is not None and self.observation_high is not None:
             if np.any(np.asarray(self.observation_low) > self.observation_high):

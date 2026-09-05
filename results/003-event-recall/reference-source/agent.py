@@ -4,8 +4,7 @@ This module imports no environment and has no access to simulator state, rewards
 coverage, or completion metrics. Goals are an explicit diagnostic-only option.
 """
 
-import copy
-from dataclasses import asdict, dataclass, field
+from dataclasses import dataclass, field
 from time import perf_counter
 
 import numpy as np
@@ -103,14 +102,7 @@ class RTGAAgent:
             raise ValueError('Training periods, warmup, and repeats must be positive')
         self.n_actions, self.goal = n_actions, goal
         low, high = np.asarray(observation_low), np.asarray(observation_high)
-        if low.ndim != 1 or high.shape != low.shape:
-            raise ValueError('RTGAAgent currently needs flat vectors; image observations need an encoder')
-        if c.mode == 'goal' and goal is None:
-            raise ValueError('Goal mode requires an explicit diagnostic goal')
-        magnitude = np.maximum(np.abs(low), np.abs(high))
-        # Unbounded numeric Gymnasium dimensions start in their native units.
-        # This is an explicit scale fallback, not an invented observation bound.
-        scale = np.maximum(np.where(np.isfinite(magnitude), magnitude, 1.), 1e-3)
+        scale = np.maximum(np.maximum(np.abs(low), np.abs(high)), 1e-3)
         self.model = DynamicsEnsemble(EnsembleConfig(
             len(low), n_actions, members=c.members, hidden=c.hidden, seed=c.seed,
             observation_scale=tuple(scale), observation_low=tuple(low),
@@ -123,74 +115,6 @@ class RTGAAgent:
         self.last_decision = None
         self.last_info = {}
         self._warmup_action = 0
-
-    def state_dict(self):
-        """Snapshot decision state; the environment must be saved separately.
-
-        Diagnostic timings and the last rendered decision are not resumed.
-        Model parameters, optimizer, replay, genomes and all private RNGs are.
-        """
-        return copy.deepcopy({
-            'format_version': 1, 'config': asdict(self.config),
-            'n_actions': self.n_actions,
-            'goal': None if self.goal is None else np.asarray(self.goal).tolist(),
-            'model': self.model.state_dict(), 'replay': self.replay.state_dict(),
-            'planner': {'population': self.planner.population, 'ages': self.planner.ages,
-                        'rng': self.planner.rng.bit_generator.state},
-            'rng': self.rng.bit_generator.state,
-            'previous_state': self.previous_state, 'previous_action': self.previous_action,
-            'transitions': self.transitions, 'warmup_action': self._warmup_action,
-        })
-
-    def load_state_dict(self, state):
-        if (state.get('format_version') != 1 or state['config'] != asdict(self.config)
-                or state['n_actions'] != self.n_actions
-                or state['goal'] != (None if self.goal is None else np.asarray(self.goal).tolist())):
-            raise ValueError('Agent checkpoint configuration does not match')
-        state = copy.deepcopy(state)
-        self.model.load_state_dict(state['model'])
-        self.replay.load_state_dict(state['replay'])
-        self.planner.population = state['planner']['population']
-        self.planner.ages = state['planner']['ages']
-        self.planner.rng.bit_generator.state = state['planner']['rng']
-        self.planner.last_evaluated_population = None
-        self.rng.bit_generator.state = state['rng']
-        self.previous_state, self.previous_action = state['previous_state'], state['previous_action']
-        self.transitions, self._warmup_action = state['transitions'], state['warmup_action']
-        self.last_decision, self.last_info = None, {}
-
-    def save(self, path):
-        # Encode arrays as plain tensor records so loading needs no pickle
-        # globals beyond PyTorch's restricted weights-only loader.
-        def encode(value):
-            if isinstance(value, np.ndarray):
-                return {'__rtga_array__': torch.from_numpy(value.copy())}
-            if isinstance(value, dict):
-                return {key: encode(item) for key, item in value.items()}
-            if isinstance(value, (list, tuple)):
-                return type(value)(encode(item) for item in value)
-            return value
-        torch.save(encode(self.state_dict()), path)
-
-    @classmethod
-    def load(cls, path):
-        def decode(value):
-            if isinstance(value, dict):
-                if set(value) == {'__rtga_array__'}:
-                    return value['__rtga_array__'].numpy().copy()
-                return {key: decode(item) for key, item in value.items()}
-            if isinstance(value, (list, tuple)):
-                return type(value)(decode(item) for item in value)
-            return value
-        state = decode(torch.load(path, map_location='cpu', weights_only=True))
-        config = dict(state['config'])
-        config['planner'] = PlannerConfig(**config['planner'])
-        model_config = state['model']['config']
-        agent = cls(model_config['observation_low'], model_config['observation_high'],
-                    state['n_actions'], AgentConfig(**config),
-                    binary_dims=model_config['binary_dims'], goal=state['goal'])
-        agent.load_state_dict(state)
-        return agent
 
     def observe_final(self, observation):
         """Record final observation before resetting; do not invent a reset transition."""

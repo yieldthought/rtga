@@ -1,0 +1,400 @@
+{
+  "experiment": "exact_event_recall",
+  "provenance": {
+    "created_utc": "2026-09-05T10:08:57.662761+00:00",
+    "git_commit": "5f6b89e1abb59de4d7e7f13ffb848b1e02446bae",
+    "git_dirty": true,
+    "python": "3.12.11",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "numpy": "2.5.2",
+    "command": [
+      "/opt/homebrew/Cellar/python@3.12/3.12.11/Frameworks/Python.framework/Versions/3.12/Resources/Python.app/Contents/MacOS/Python",
+      "-m",
+      "rtga.event_recall_study",
+      "--output",
+      "results/003-event-recall",
+      "--reference",
+      "runs/random-mechanism-dev0",
+      "--core-source",
+      "results/003-event-recall/reference-source"
+    ],
+    "source_sha256": {
+      "envs.py": "9883f95d36f3929cb61ca83eb0372550f0a082d8365fec5818f38121c8455956",
+      "viewer.py": "72ccd5e3ebbfaa4f68ff0c7b05ba0fd0d1454c60a590c7e75f35b95f2237d76e",
+      "models.py": "dd329c391f93a317f185a895fb8369b0e39370c1b77e5ad7f67f5dbcfa6b298f",
+      "__init__.py": "aaf2010db85eef0acabcaf4dd3eeeeae037891e3b9a7d1c2b00dd900ac1b0c36",
+      "model_study.py": "ea3a4f9aee5e026032d7ea90f75d9815fa6c93e2fe551678289d4b9661fe7d24",
+      "experiments.py": "f47a9451894bf83341b9030ae3c8302589301123f20991a2c38f12ad552b2569",
+      "cli.py": "f3ff13862cb15d0715c4279d63099bdb4a9523e90e3a2dac571aa2bf13c60d69",
+      "event_recall_study.py": "c7500a14bcb5b20737568ab86f888b82273323997cf79be7800f7943cb88e5ff",
+      "oracle_report.py": "fe3bdc22cc1d888285b877a167e94c1ef6aec743cfccd790cf6bbf9599fe33a7",
+      "agent.py": "172d7da25d22bbc3f582f8530f38e834c413e58d01ecadc57b3095bf2938ac5d",
+      "planning.py": "201f301fa74b340f72ce97d542cede37d389cc0ab79a3adf89c71c64ce52b36a",
+      "online_experiment.py": "aa9a49c7172488f61df830cc57d9bae7a92dd985a94df2e241266146a9813cd2",
+      "model_report.py": "a5dbaddcb1aefa29412c14bffafbb52fb4a04193385351d4bed03d547dd59a21",
+      "adapters.py": "c13100791a3966195eb928b6994f557d4aa3a12dde352f120745e1c374e31dca"
+    }
+  },
+  "executed_source_sha256": {
+    "envs.py": "9883f95d36f3929cb61ca83eb0372550f0a082d8365fec5818f38121c8455956",
+    "models.py": "1d31a88ba68eb37eafd804c1d159d79d59aa57c6628240ef96ae6ee3b34cbbbb",
+    "__init__.py": "aaf2010db85eef0acabcaf4dd3eeeeae037891e3b9a7d1c2b00dd900ac1b0c36",
+    "experiments.py": "f47a9451894bf83341b9030ae3c8302589301123f20991a2c38f12ad552b2569",
+    "event_recall_study.py": "c7500a14bcb5b20737568ab86f888b82273323997cf79be7800f7943cb88e5ff",
+    "agent.py": "0b45a5505d9bd36801d553ea2a9765ea778648e81ae5e1838534afc1f6cb85b5",
+    "planning.py": "201f301fa74b340f72ce97d542cede37d389cc0ab79a3adf89c71c64ce52b36a",
+    "online_experiment.py": "aa9a49c7172488f61df830cc57d9bae7a92dd985a94df2e241266146a9813cd2"
+  },
+  "reference": "runs/random-mechanism-dev0",
+  "protocol": {
+    "seed": 0,
+    "variant": "mechanism",
+    "actual_steps": 2500,
+    "config": {
+      "warmup": 256,
+      "initial_fit": 200,
+      "train_every": 8,
+      "train_steps": 8,
+      "batch_size": 128,
+      "replay_capacity": 100000,
+      "members": 3,
+      "hidden": 64,
+      "seed": 0,
+      "mode": "random",
+      "warmup_repeat": 1,
+      "discount": 0.98,
+      "risk_penalty": 0.0,
+      "planner": {
+        "population": 48,
+        "horizon": 12,
+        "generations": 3,
+        "method": "persistent",
+        "elite_fraction": 0.1,
+        "mutation_rate": null,
+        "crossover": true,
+        "segment_mutation": 0.15,
+        "immigrants": 0.0,
+        "initial_repeat": 1,
+        "seed": 7101
+      }
+    },
+    "probe_role": "Evaluator-only; no probe injection",
+    "logging": "After every individual optimizer step, using a post-step hook",
+    "exposure_counting": "Inspect already-sampled batches; no additional RNG calls",
+    "learned_event_criterion": "Member next-door probability >= 0.5, matching planner threshold"
+  },
+  "event": {
+    "step": 326,
+    "state": [
+      0.24425198549466912,
+      0.5049150643933559,
+      -0.05250541498546066,
+      0.12295891529084742,
+      0.0,
+      0.0
+    ],
+    "action": 5,
+    "next_state": [
+      0.24194174723530884,
+      0.5103252566661531,
+      -0.04620476518720538,
+      0.10820384545594573,
+      1.0,
+      0.0
+    ]
+  },
+  "opening_real_step_one_based": 327,
+  "validation": {
+    "core_source_hashes_match_reference": {
+      "agent.py": true,
+      "models.py": true,
+      "planning.py": true,
+      "envs.py": true
+    },
+    "independent_random_trajectory_exact_match": true,
+    "full_transitions_checked": 2500,
+    "reference_sampled_trace_frames_checked": 625,
+    "reference_trace_fields_checked": [
+      "state",
+      "action",
+      "metrics",
+      "model_version",
+      "prediction_error",
+      "disagreement"
+    ],
+    "reference_trace_mismatches": [],
+    "checkpoint": {
+      "exact_match": true,
+      "tensor_count": 24,
+      "max_tensor_absolute_error": 0.0,
+      "mismatches": []
+    },
+    "final_metrics_match": true,
+    "training_update_count_match": true
+  },
+  "validated_original_prefix": true,
+  "replay_event_count": 1,
+  "actual_opening_transition_count": 1,
+  "final_metrics": {
+    "steps": 2500,
+    "visited_cells": 88,
+    "coverage": 0.34375,
+    "door_open": true,
+    "switch_interactions": 52,
+    "noise_interactions": 0
+  },
+  "summary": {
+    "post_event_optimizer_updates": 2176,
+    "first_post_event_update": {
+      "kind": "after_optimizer_step",
+      "model_version": 265,
+      "observed_transitions": 328,
+      "replay_size": 328,
+      "opening_probability_members": [
+        0.0020151042845100164,
+        0.0024986157659441233,
+        0.0015258982311934233
+      ],
+      "opening_probability_mean": 0.00201320624910295,
+      "door_disagreement": 1.5769836636536638e-07,
+      "normalized_disagreement": 2.853295501083073e-05,
+      "member_next_state_means": [
+        [
+          0.23475709557533264,
+          0.5168837904930115,
+          -0.04557991027832031,
+          0.10586010664701462,
+          0.0020151042845100164,
+          -0.00685703381896019
+        ],
+        [
+          0.24464350938796997,
+          0.5202882289886475,
+          -0.05326755344867706,
+          0.11072823405265808,
+          0.0024986157659441233,
+          -0.008830143138766289
+        ],
+        [
+          0.2486683577299118,
+          0.5127182006835938,
+          -0.0425398126244545,
+          0.11255429685115814,
+          0.0015258982311934233,
+          -0.00013898685574531555
+        ]
+      ],
+      "member_next_state_variances": [
+        [
+          0.00034673939808271825,
+          0.00034355546813458204,
+          8.757652540225536e-05,
+          8.607188647147268e-05,
+          0.002011043718084693,
+          0.00035298557486385107
+        ],
+        [
+          0.0003513556730467826,
+          0.00035116070648655295,
+          8.710590918781236e-05,
+          8.759114280110225e-05,
+          0.0024923726450651884,
+          0.0003552568960003555
+        ],
+        [
+          0.0003539506869856268,
+          0.00034799808054231107,
+          8.627956412965432e-05,
+          8.72592645464465e-05,
+          0.0015235699247568846,
+          0.0003488473885226995
+        ]
+      ],
+      "batch_event_occurrences": [
+        2,
+        0,
+        0
+      ],
+      "cumulative_event_occurrences": [
+        2,
+        0,
+        0
+      ]
+    },
+    "peak_ensemble_probability": 0.07984982803463936,
+    "peak_ensemble_probability_record": {
+      "kind": "after_optimizer_step",
+      "model_version": 343,
+      "observed_transitions": 400,
+      "replay_size": 400,
+      "opening_probability_members": [
+        0.048199329525232315,
+        0.10235610604286194,
+        0.08899404853582382
+      ],
+      "opening_probability_mean": 0.07984983175992966,
+      "door_disagreement": 0.0005306344828568399,
+      "normalized_disagreement": 0.00012155934192320795,
+      "member_next_state_means": [
+        [
+          0.24097558856010437,
+          0.5060740113258362,
+          -0.042367976158857346,
+          0.10307511687278748,
+          0.048199329525232315,
+          0.0008746515959501266
+        ],
+        [
+          0.2384204864501953,
+          0.5123094916343689,
+          -0.05045125260949135,
+          0.11025497317314148,
+          0.10235610604286194,
+          0.012837706133723259
+        ],
+        [
+          0.2535332143306732,
+          0.5126936435699463,
+          -0.049566809087991714,
+          0.10743123292922974,
+          0.08899404853582382,
+          -0.0056454092264175415
+        ]
+      ],
+      "member_next_state_variances": [
+        [
+          0.00034596200566738844,
+          0.0003429495554883033,
+          8.704769425094128e-05,
+          8.60134168760851e-05,
+          0.0458761528134346,
+          0.0003508371883071959
+        ],
+        [
+          0.00035460901563055813,
+          0.0003546999942045659,
+          8.788697596173733e-05,
+          8.855934720486403e-05,
+          0.09187933802604675,
+          0.0003581690543796867
+        ],
+        [
+          0.0003605801030062139,
+          0.0003517590230330825,
+          8.730588160688058e-05,
+          8.872042235452682e-05,
+          0.08107411116361618,
+          0.0003538873861543834
+        ]
+      ],
+      "batch_event_occurrences": [
+        0,
+        2,
+        0
+      ],
+      "cumulative_event_occurrences": [
+        20,
+        30,
+        21
+      ]
+    },
+    "peak_member_probabilities": [
+      0.051836781203746796,
+      0.1032065823674202,
+      0.09013105183839798
+    ],
+    "member_updates_at_or_above_half": [
+      0,
+      0,
+      0
+    ],
+    "ensemble_updates_at_or_above_half": 0,
+    "last_record": {
+      "kind": "after_optimizer_step",
+      "model_version": 2440,
+      "observed_transitions": 2496,
+      "replay_size": 2496,
+      "opening_probability_members": [
+        0.010748990811407566,
+        0.011705651879310608,
+        0.019603122025728226
+      ],
+      "opening_probability_mean": 0.014019254595041275,
+      "door_disagreement": 1.574231828271877e-05,
+      "normalized_disagreement": 4.9724619994118394e-06,
+      "member_next_state_means": [
+        [
+          0.24296194314956665,
+          0.5088510513305664,
+          -0.04628828167915344,
+          0.10722967982292175,
+          0.010748990811407566,
+          -0.000361492857336998
+        ],
+        [
+          0.2429603934288025,
+          0.512605607509613,
+          -0.04418950527906418,
+          0.10927507281303406,
+          0.011705651879310608,
+          -0.0009056343697011471
+        ],
+        [
+          0.24225853383541107,
+          0.5086805820465088,
+          -0.04695875197649002,
+          0.1069597601890564,
+          0.019603122025728226,
+          -0.0025450866669416428
+        ]
+      ],
+      "member_next_state_variances": [
+        [
+          0.0003361223207321018,
+          0.00033605482894927263,
+          8.409563452005386e-05,
+          8.403058018302545e-05,
+          0.010633450001478195,
+          0.00033692963188514113
+        ],
+        [
+          0.0003367158642504364,
+          0.0003366330056451261,
+          8.41780420159921e-05,
+          8.412403258262202e-05,
+          0.011568630114197731,
+          0.0003368562029208988
+        ],
+        [
+          0.00033653381979092956,
+          0.0003362582647241652,
+          8.404716936638579e-05,
+          8.407590939896181e-05,
+          0.019218839704990387,
+          0.0003363297728355974
+        ]
+      ],
+      "batch_event_occurrences": [
+        0,
+        0,
+        1
+      ],
+      "cumulative_event_occurrences": [
+        236,
+        257,
+        243
+      ]
+    },
+    "event_batch_occurrences_per_member": [
+      236,
+      257,
+      243
+    ],
+    "updates_containing_event_per_member": [
+      219,
+      239,
+      228
+    ],
+    "interpretation_limit": "Recall concerns this one experienced state/action; it does not establish a general switch rule."
+  }
+}
